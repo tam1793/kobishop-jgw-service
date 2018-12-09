@@ -9,6 +9,7 @@ import app.entity.EnApiOutput;
 import app.entity.EnApp.EnUser;
 import app.entity.EnApp.EnUserSession;
 import app.config.ConfigApp;
+import app.entity.EnApp.EnUserPermission;
 import core.utilities.DBConnector;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,8 +19,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import static kobishop.Tables.USER;
-import kobishop.tables.records.UserRecord;
+import static kobishop.tables.Account.ACCOUNT;
+import kobishop.tables.records.AccountRecord;
 import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -67,12 +68,12 @@ public class LoginService {
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            UserRecord user = create.fetchOne(USER, USER.USERNAME.eq(userName).and(USER.PASSWORD.eq(password)));
+            AccountRecord user = create.fetchOne(ACCOUNT, ACCOUNT.USERNAME.eq(userName).and(ACCOUNT.PASSWORD.eq(password)));
             if (user == null) {
                 logger.info("login false: USERNAME_OR_PASSWORD_INVALID");
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.USERNAME_OR_PASSWORD_INVALID);
             }
-            String token = createToken(user.getUsername());
+            String token = createToken(new EnUserPermission(user.getUsername(), user.getRole()));
             EnUserSession rs = new EnUserSession(token, user.getUsername(), user.getRole());
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
 
@@ -88,14 +89,15 @@ public class LoginService {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
-            int result = create.insertInto(USER)
-                    .set(USER.USERNAME, newUser.userName)
-                    .set(USER.PASSWORD, newUser.password)
-                    .set(USER.NAME, newUser.name)
-                    .set(USER.BIRTHDAY, newUser.dob)
-                    .set(USER.ADDRESS, newUser.address)
-                    .set(USER.PHONE, newUser.phone)
-                    .set(USER.ROLE, "user")
+            int result = create.insertInto(ACCOUNT)
+                    .set(ACCOUNT.USERNAME, newUser.userName)
+                    .set(ACCOUNT.PASSWORD, newUser.password)
+                    .set(ACCOUNT.NAME, newUser.name)
+                    .set(ACCOUNT.BIRTHDAY, newUser.dob)
+                    .set(ACCOUNT.ADDRESS, newUser.address)
+                    .set(ACCOUNT.PHONE, newUser.phone)
+                    .set(ACCOUNT.ROLE, "user")
+                    .set(ACCOUNT.EMAIL,newUser.email)
                     .execute();
             if (result > 0) {
                 logger.info("create user success:" + newUser);
@@ -118,7 +120,7 @@ public class LoginService {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
-            UserRecord result = create.fetchOne(USER, USER.USERNAME.eq(userName));
+            AccountRecord result = create.fetchOne(ACCOUNT, ACCOUNT.USERNAME.eq(userName));
             if (result != null) {
                 logger.info("check user exist");
                 return true;
@@ -133,12 +135,12 @@ public class LoginService {
         return false;
     }
 
-    private String createToken(String userName) {
+    private String createToken(EnUserPermission user) {
         try {
             String token = Jwts.builder()
-                    .setSubject("Nab Id Coh")
+                    .setSubject("Kobishop")
                     .setExpiration(new Date(System.currentTimeMillis() + (6 * 3600 * 1000L)))
-                    .claim("userName", userName)
+                    .claim("user", user)
                     .signWith(SignatureAlgorithm.HS512, loginSecret)
                     .compact();
             return token;

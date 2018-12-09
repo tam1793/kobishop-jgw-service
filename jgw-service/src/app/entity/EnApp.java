@@ -31,8 +31,8 @@ public class EnApp {
 
     public static class EnUserPermission {
 
-        String userName;
-        String permission;
+        public String userName;
+        public String permission;
 
         public EnUserPermission(String userName, String permission) {
             this.userName = userName;
@@ -46,19 +46,42 @@ public class EnApp {
         public String userName;
         public byte[] password;
         public String name;
-        public Date dob;
+        public String dob;
         public String address;
         public String phone;
+        public String email;
 
-        public EnUser(String userName, byte[] password, String name, Date dob, String address, String phone) {
+        public EnUser(String userName, byte[] password, String name, String dob, String address, String phone, String email) {
             this.userName = userName;
             this.password = password;
             this.name = name;
             this.dob = dob;
             this.address = address;
             this.phone = phone;
+            this.email = email;
         }
 
+    }
+    
+    public static class EnProduct {
+        public int id;
+        public int typeId;
+        public int brandId;
+        public String name;
+        public String description;
+        public int price;
+        public int soldItems;
+        public int leftItems;
+        public String specs;
+        public Boolean isDeleted;
+    }
+
+    public static class EnOrder {
+        public Date createDate;
+        public int id;
+        public String products;
+        public String state;
+        public int userId;
     }
 
 }

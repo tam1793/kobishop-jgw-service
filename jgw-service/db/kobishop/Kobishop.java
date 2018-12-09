@@ -10,7 +10,11 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
-import kobishop.tables.User;
+import kobishop.tables.Account;
+import kobishop.tables.Brand;
+import kobishop.tables.Order;
+import kobishop.tables.Product;
+import kobishop.tables.Type;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -30,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Kobishop extends SchemaImpl {
 
-    private static final long serialVersionUID = -715581682;
+    private static final long serialVersionUID = 536164744;
 
     /**
      * The reference instance of <code>kobishop</code>
@@ -38,9 +42,29 @@ public class Kobishop extends SchemaImpl {
     public static final Kobishop KOBISHOP = new Kobishop();
 
     /**
-     * The table <code>kobishop.user</code>.
+     * The table <code>kobishop.account</code>.
      */
-    public final User USER = kobishop.tables.User.USER;
+    public final Account ACCOUNT = kobishop.tables.Account.ACCOUNT;
+
+    /**
+     * The table <code>kobishop.brand</code>.
+     */
+    public final Brand BRAND = kobishop.tables.Brand.BRAND;
+
+    /**
+     * The table <code>kobishop.order</code>.
+     */
+    public final Order ORDER = kobishop.tables.Order.ORDER;
+
+    /**
+     * The table <code>kobishop.product</code>.
+     */
+    public final Product PRODUCT = kobishop.tables.Product.PRODUCT;
+
+    /**
+     * The table <code>kobishop.type</code>.
+     */
+    public final Type TYPE = kobishop.tables.Type.TYPE;
 
     /**
      * No further instances allowed
@@ -67,6 +91,10 @@ public class Kobishop extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            User.USER);
+            Account.ACCOUNT,
+            Brand.BRAND,
+            Order.ORDER,
+            Product.PRODUCT,
+            Type.TYPE);
     }
 }

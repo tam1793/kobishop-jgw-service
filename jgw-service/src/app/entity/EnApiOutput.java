@@ -23,8 +23,12 @@ public class EnApiOutput extends ApiOutput {
         LOGIN_TOKEN_INVALID(-6, "LOGIN_TOKEN_INVALID"),
         USER_NOT_EXIST(-7, "USER_NOT_EXIST"),
         USER_EXIST(-8, "USER_EXIST"),
-        SERVER_ERROR(-1000, "SYSTEM_ERROR");
-
+        PERMISSION_DENY(-999, "PERMISSION_DENY"),
+        SERVER_ERROR(-1000, "SYSTEM_ERROR"),
+        //PRODUCT
+        PRODUCT_NOT_FOUND(-101, "PRODUCT_NOT_FOUND"),
+        //ORDER
+        ORDER_NOT_FOUND(-102,"ORDER_NOT_FOUND");
         public int code;
         public String message;
 

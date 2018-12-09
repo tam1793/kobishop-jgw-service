@@ -7,8 +7,8 @@ package app.user.controller;
 
 import app.entity.EnApiOutput;
 import app.guest.service.VerifyUserNameService;
-import app.user.service.PermissionService;
 import app.config.ConfigApp;
+import app.entity.EnApp.*;
 import core.controller.ApiServlet;
 import core.utilities.CommonUtil;
 import javax.servlet.http.HttpServletRequest;
@@ -27,32 +27,24 @@ public abstract class AbstractController extends ApiServlet {
     @Override
     protected Object execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"token", "action"})
-                    || !CommonUtil.isValidString(req.getParameter("token"))
-                    || !CommonUtil.isValidString(req.getParameter("action"))) {
+            if (!checkValidParam(req, new String[]{"token"})
+                    || !CommonUtil.isValidString(req.getParameter("token"))) {
                 return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
             String token = req.getParameter("token");
-            String verifiedUserName = verifyInstance.verifiedUserName(token);
+            EnUserPermission verifiedUserName = verifyInstance.verifiedUserName(token);
             if (verifiedUserName == null) {
                 logger.info("TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
-            String permission = PermissionService.getInstance(ConfigApp.LOGIN_SECRET_KEY).getPermissionUser(verifiedUserName);
-            if (permission == null) {
-                logger.info("userName not exist" + resp);
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
-            }
-            String action = req.getParameter("action");
-            return doProcess(action, req, resp);
-
+            return doProcess(verifiedUserName.userName, req, resp);
         } catch (Exception ex) {
             logger.error("AbstractController: " + ex.getMessage(), ex);
         }
         return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
-    protected abstract EnApiOutput doProcess(String action, HttpServletRequest req, HttpServletResponse resp);
+    protected abstract EnApiOutput doProcess(String userName, HttpServletRequest req, HttpServletResponse resp);
     //To change body of generated methods, choose Tools | Templates.
 
 }

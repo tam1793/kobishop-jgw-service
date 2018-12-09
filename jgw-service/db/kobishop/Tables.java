@@ -6,7 +6,11 @@ package kobishop;
 
 import javax.annotation.Generated;
 
-import kobishop.tables.User;
+import kobishop.tables.Account;
+import kobishop.tables.Brand;
+import kobishop.tables.Order;
+import kobishop.tables.Product;
+import kobishop.tables.Type;
 
 
 /**
@@ -23,7 +27,27 @@ import kobishop.tables.User;
 public class Tables {
 
     /**
-     * The table <code>kobishop.user</code>.
+     * The table <code>kobishop.account</code>.
      */
-    public static final User USER = kobishop.tables.User.USER;
+    public static final Account ACCOUNT = kobishop.tables.Account.ACCOUNT;
+
+    /**
+     * The table <code>kobishop.brand</code>.
+     */
+    public static final Brand BRAND = kobishop.tables.Brand.BRAND;
+
+    /**
+     * The table <code>kobishop.order</code>.
+     */
+    public static final Order ORDER = kobishop.tables.Order.ORDER;
+
+    /**
+     * The table <code>kobishop.product</code>.
+     */
+    public static final Product PRODUCT = kobishop.tables.Product.PRODUCT;
+
+    /**
+     * The table <code>kobishop.type</code>.
+     */
+    public static final Type TYPE = kobishop.tables.Type.TYPE;
 }

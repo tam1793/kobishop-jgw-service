@@ -5,7 +5,7 @@
         <driver>com.mysql.jdbc.Driver</driver>
         <url>jdbc:mysql://127.0.0.1:3306/kobishop?serverTimezone=UTC</url>        
         <user>root</user>
-        <password></password>
+        <password>admin</password>
     </jdbc>
 
     <generator>

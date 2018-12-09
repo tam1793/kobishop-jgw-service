@@ -24,10 +24,12 @@ public class AccountController extends AbstractAdminController {
     private final Logger logger = Logger.getLogger(LoginController.class);
 
     @Override
-    protected EnApiOutput doProcess(String action, HttpServletRequest req, HttpServletResponse resp) {
+    protected EnApiOutput doProcess(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            switch (action) {
-                case "insertAdmin":
+            String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
+
+            switch (pathInfo) {
+                case "/insertAdmin":
                     return insertAdmin(req, resp);
                 default:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
@@ -40,8 +42,8 @@ public class AccountController extends AbstractAdminController {
 
     private EnApiOutput insertAdmin(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"userName", "password", "name", "role"})
-                    || !CommonUtil.isValidString(req.getParameter("userName"))
+            if (!checkValidParam(req, new String[]{"username", "password", "name", "role"})
+                    || !CommonUtil.isValidString(req.getParameter("username"))
                     || !CommonUtil.isValidString(req.getParameter("password"))
                     || !CommonUtil.isValidString(req.getParameter("name"))
                     || !CommonUtil.isValidString(req.getParameter("role"))) {
@@ -49,14 +51,14 @@ public class AccountController extends AbstractAdminController {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
 
-            String userName = req.getParameter("userName");            
+            String userName = req.getParameter("username");
             boolean checkUserName = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).checkUser(userName);
-            if(checkUserName == true){
+            if (checkUserName == true) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.USER_EXIST);
             }
-            
+
             byte[] password = req.getParameter("password").getBytes();
-            
+
             String name = req.getParameter("name");
             String role = req.getParameter("role");
 

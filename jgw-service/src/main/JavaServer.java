@@ -6,7 +6,6 @@
 package main;
 
 import app.admin.controller.AccountController;
-import app.controller.DemoApiController;
 import app.guest.controller.LoginController;
 import app.config.ConfigApp;
 import java.util.logging.Level;
@@ -49,12 +48,14 @@ public class JavaServer {
         SessionHandler sessions = new SessionHandler(manager);
         context.setHandler(sessions);
 
-        context.addServlet(DemoApiController.class, "/demoService");
-        context.addServlet(LoginController.class, "/login");
+        //Servlet for Guest
+        context.addServlet(LoginController.class, "/auth/*");
+        context.addServlet(app.guest.controller.ProductController.class, "/products/*");
 
         //Servlet for User
+        context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
         //Servlet for Admin
-        context.addServlet(AccountController.class, "/admin/account");
+        context.addServlet(AccountController.class, "/admin/account/*");
 
         server.setHandler(context);
         try {

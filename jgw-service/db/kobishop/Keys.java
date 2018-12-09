@@ -6,9 +6,18 @@ package kobishop;
 
 import javax.annotation.Generated;
 
-import kobishop.tables.User;
-import kobishop.tables.records.UserRecord;
+import kobishop.tables.Account;
+import kobishop.tables.Brand;
+import kobishop.tables.Order;
+import kobishop.tables.Product;
+import kobishop.tables.Type;
+import kobishop.tables.records.AccountRecord;
+import kobishop.tables.records.BrandRecord;
+import kobishop.tables.records.OrderRecord;
+import kobishop.tables.records.ProductRecord;
+import kobishop.tables.records.TypeRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
@@ -32,28 +41,55 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<UserRecord, Integer> IDENTITY_USER = Identities0.IDENTITY_USER;
+    public static final Identity<AccountRecord, Integer> IDENTITY_ACCOUNT = Identities0.IDENTITY_ACCOUNT;
+    public static final Identity<BrandRecord, Integer> IDENTITY_BRAND = Identities0.IDENTITY_BRAND;
+    public static final Identity<OrderRecord, Integer> IDENTITY_ORDER = Identities0.IDENTITY_ORDER;
+    public static final Identity<ProductRecord, Integer> IDENTITY_PRODUCT = Identities0.IDENTITY_PRODUCT;
+    public static final Identity<TypeRecord, Integer> IDENTITY_TYPE = Identities0.IDENTITY_TYPE;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
+    public static final UniqueKey<AccountRecord> KEY_ACCOUNT_PRIMARY = UniqueKeys0.KEY_ACCOUNT_PRIMARY;
+    public static final UniqueKey<AccountRecord> KEY_ACCOUNT_USERNAME_UNIQUE = UniqueKeys0.KEY_ACCOUNT_USERNAME_UNIQUE;
+    public static final UniqueKey<BrandRecord> KEY_BRAND_PRIMARY = UniqueKeys0.KEY_BRAND_PRIMARY;
+    public static final UniqueKey<OrderRecord> KEY_ORDER_PRIMARY = UniqueKeys0.KEY_ORDER_PRIMARY;
+    public static final UniqueKey<ProductRecord> KEY_PRODUCT_PRIMARY = UniqueKeys0.KEY_PRODUCT_PRIMARY;
+    public static final UniqueKey<TypeRecord> KEY_TYPE_PRIMARY = UniqueKeys0.KEY_TYPE_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<OrderRecord, AccountRecord> BILL_ACCOUNT = ForeignKeys0.BILL_ACCOUNT;
+    public static final ForeignKey<ProductRecord, TypeRecord> PRODUCT_TYPE = ForeignKeys0.PRODUCT_TYPE;
+    public static final ForeignKey<ProductRecord, BrandRecord> PRODUCT_BRAND = ForeignKeys0.PRODUCT_BRAND;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
-        public static Identity<UserRecord, Integer> IDENTITY_USER = createIdentity(User.USER, User.USER.ID);
+        public static Identity<AccountRecord, Integer> IDENTITY_ACCOUNT = createIdentity(Account.ACCOUNT, Account.ACCOUNT.ID);
+        public static Identity<BrandRecord, Integer> IDENTITY_BRAND = createIdentity(Brand.BRAND, Brand.BRAND.ID);
+        public static Identity<OrderRecord, Integer> IDENTITY_ORDER = createIdentity(Order.ORDER, Order.ORDER.ID);
+        public static Identity<ProductRecord, Integer> IDENTITY_PRODUCT = createIdentity(Product.PRODUCT, Product.PRODUCT.ID);
+        public static Identity<TypeRecord, Integer> IDENTITY_TYPE = createIdentity(Type.TYPE, Type.TYPE.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = createUniqueKey(User.USER, "KEY_user_PRIMARY", User.USER.ID);
+        public static final UniqueKey<AccountRecord> KEY_ACCOUNT_PRIMARY = createUniqueKey(Account.ACCOUNT, "KEY_account_PRIMARY", Account.ACCOUNT.ID);
+        public static final UniqueKey<AccountRecord> KEY_ACCOUNT_USERNAME_UNIQUE = createUniqueKey(Account.ACCOUNT, "KEY_account_username_UNIQUE", Account.ACCOUNT.USERNAME);
+        public static final UniqueKey<BrandRecord> KEY_BRAND_PRIMARY = createUniqueKey(Brand.BRAND, "KEY_brand_PRIMARY", Brand.BRAND.ID);
+        public static final UniqueKey<OrderRecord> KEY_ORDER_PRIMARY = createUniqueKey(Order.ORDER, "KEY_order_PRIMARY", Order.ORDER.ID);
+        public static final UniqueKey<ProductRecord> KEY_PRODUCT_PRIMARY = createUniqueKey(Product.PRODUCT, "KEY_product_PRIMARY", Product.PRODUCT.ID);
+        public static final UniqueKey<TypeRecord> KEY_TYPE_PRIMARY = createUniqueKey(Type.TYPE, "KEY_type_PRIMARY", Type.TYPE.ID);
+    }
+
+    private static class ForeignKeys0 extends AbstractKeys {
+        public static final ForeignKey<OrderRecord, AccountRecord> BILL_ACCOUNT = createForeignKey(kobishop.Keys.KEY_ACCOUNT_PRIMARY, Order.ORDER, "BILL_ACCOUNT", Order.ORDER.USERID);
+        public static final ForeignKey<ProductRecord, TypeRecord> PRODUCT_TYPE = createForeignKey(kobishop.Keys.KEY_TYPE_PRIMARY, Product.PRODUCT, "PRODUCT_TYPE", Product.PRODUCT.TYPEID);
+        public static final ForeignKey<ProductRecord, BrandRecord> PRODUCT_BRAND = createForeignKey(kobishop.Keys.KEY_BRAND_PRIMARY, Product.PRODUCT, "PRODUCT_BRAND", Product.PRODUCT.BRANDID);
     }
 }

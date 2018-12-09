@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import static kobishop.tables.User.USER;
-import kobishop.tables.records.UserRecord;
+import static kobishop.tables.Account.ACCOUNT;
+import kobishop.tables.records.AccountRecord;
 import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -55,19 +55,19 @@ public class PermissionService {
         }
         return instances.get(key);
     }
-    
-    public String getPermissionUser(String userName){
+
+    public String getPermissionUser(String userName) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            UserRecord user = create.fetchOne(USER, USER.USERNAME.eq(userName));
-            if(user == null){
+            AccountRecord user = create.fetchOne(ACCOUNT, ACCOUNT.USERNAME.eq(userName));
+            if (user == null) {
                 logger.info("userName not exist");
                 return null;
             }
-            return user.getRole();            
-            
+            return user.getRole();
+
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }

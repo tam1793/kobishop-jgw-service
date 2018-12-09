@@ -10,7 +10,7 @@ import core.utilities.DBConnector;
 import java.sql.Connection;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import static kobishop.tables.User.USER;
+import static kobishop.tables.Account.ACCOUNT;
 import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -56,11 +56,11 @@ public class AccountService {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
-            int result = create.insertInto(USER)
-                    .set(USER.USERNAME, userName)
-                    .set(USER.PASSWORD, password)
-                    .set(USER.NAME, name)
-                    .set(USER.ROLE, role).execute();
+            int result = create.insertInto(ACCOUNT)
+                    .set(ACCOUNT.USERNAME, userName)
+                    .set(ACCOUNT.PASSWORD, password)
+                    .set(ACCOUNT.NAME, name)
+                    .set(ACCOUNT.ROLE, role).execute();
             if (result > 0) {
                 logger.info("create admin success:" + userName + "--" + password);
                 return 1;

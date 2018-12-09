@@ -5,6 +5,8 @@
  */
 package app.guest.service;
 
+import app.entity.EnApp.EnUserPermission;
+import com.google.gson.Gson;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -19,12 +21,13 @@ import org.apache.log4j.Logger;
  * @author tam
  */
 public class VerifyUserNameService {
+
     private static final Logger logger = Logger.getLogger(VerifyUserNameService.class.getName());
     private static final Lock createLock = new ReentrantLock();
     private static final Map<String, VerifyUserNameService> instances = new HashMap();
 
     private static String loginSecret;
-    
+
     public static VerifyUserNameService getInstance(String loginSecret) {
         String key = loginSecret;
         if (!instances.containsKey(key)) {
@@ -43,12 +46,13 @@ public class VerifyUserNameService {
     private VerifyUserNameService(String loginSecret) {
         this.loginSecret = loginSecret;
     }
-    
-    public String verifiedUserName(String token) {
+
+    public EnUserPermission verifiedUserName(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(loginSecret).parseClaimsJws(token);
-            String userName = claims.getBody().get("userName").toString();
-            return userName;
+            Gson googleJson = new Gson();
+            EnUserPermission user = googleJson.fromJson(claims.getBody().get("user").toString(), EnUserPermission.class);
+            return user;
         } catch (Exception Ex) {
             logger.error(Ex.getMessage(), Ex);
         }

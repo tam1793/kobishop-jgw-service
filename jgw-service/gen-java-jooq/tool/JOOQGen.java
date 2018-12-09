@@ -15,7 +15,7 @@ public class JOOQGen {
 
     public static void main(String[] args) throws Exception {
         List<String> lstDbConf = new ArrayList<>(Arrays.asList(
-                "/home/tam/Desktop/MHH/kobishop-jgw-service/jgw-service/gen-java-jooq/tool/conf/kobishop_conf.xml"
+                "C:\\Users\\Lenovo\\Desktop\\KobiShop\\ProjectKobi\\kobishop-jgw-service\\jgw-service\\gen-java-jooq\\tool\\conf\\kobishop_conf.xml"
         ));
 
         lstDbConf.stream().forEach(path -> {

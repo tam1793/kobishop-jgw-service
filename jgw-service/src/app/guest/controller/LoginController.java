@@ -6,15 +6,14 @@
 package app.guest.controller;
 
 import app.entity.EnApiOutput;
-import app.entity.EnApp;
 import app.entity.EnApp.EnUser;
 import app.guest.service.LoginService;
 import app.guest.service.VerifyUserNameService;
-import app.user.service.PermissionService;
 import app.config.ConfigApp;
+import app.entity.EnApp.*;
 import core.controller.ApiServlet;
 import core.utilities.CommonUtil;
-import java.sql.Date;
+import java.security.MessageDigest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -31,20 +30,16 @@ public class LoginController extends ApiServlet {
     @Override
     protected EnApiOutput execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"action"})
-                    || !CommonUtil.isValidString(req.getParameter("action"))) {
-                logger.info("INVALID_DATA_INPUT ( Parameter : action): " + resp);
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
-            }
-            String action = req.getParameter("action");
-            switch (action) {
-                case "login":
+            String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
+
+            switch (pathInfo) {
+                case "/login":
                     return login(req, resp);
-                case "checkPermission":
+                case "/checkPermission":
                     return checkPermission(req, resp);
-                case "checkUser":
+                case "/checkUser":
                     return checkUser(req, resp);
-                case "createUser":
+                case "/register":
                     return createUser(req, resp);
                 default:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
@@ -57,16 +52,19 @@ public class LoginController extends ApiServlet {
 
     private EnApiOutput login(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"userName", "password"})
-                    || !CommonUtil.isValidString(req.getParameter("userName"))
+            if (!checkValidParam(req, new String[]{"username", "password"})
+                    || !CommonUtil.isValidString(req.getParameter("username"))
                     || !CommonUtil.isValidString(req.getParameter("password"))) {
                 logger.info("login fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
 
-            String userName = req.getParameter("userName");
-            byte[] password = req.getParameter("password").getBytes();
-            return LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).createSession(userName, password);
+            String userName = req.getParameter("username");
+            byte[] password = req.getParameter("password").getBytes("UTF-8");
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] encrypt = md5.digest(password);
+
+            return LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).createSession(userName, encrypt);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -81,17 +79,12 @@ public class LoginController extends ApiServlet {
                 return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
             String token = req.getParameter("token");
-            String verifiedUserName = verifyInstance.verifiedUserName(token);
+            EnUserPermission verifiedUserName = verifyInstance.verifiedUserName(token);
             if (verifiedUserName == null) {
                 logger.info("LOGIN_TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
-            String permission = PermissionService.getInstance(ConfigApp.LOGIN_SECRET_KEY).getPermissionUser(verifiedUserName);
-            if (permission == null) {
-                logger.info("userName not exist" + resp);
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
-            }
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, new EnApp.EnUserPermission(verifiedUserName, permission));
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, verifiedUserName);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -101,34 +94,34 @@ public class LoginController extends ApiServlet {
 
     private EnApiOutput createUser(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"userName", "password", "name", "dateOfBirth", "address", "phone"})
-                    || !CommonUtil.isValidString(req.getParameter("userName"))
+            if (!checkValidParam(req, new String[]{"username", "password", "name", "dateOfBirth", "address", "phone", "email"})
+                    || !CommonUtil.isValidString(req.getParameter("username"))
                     || !CommonUtil.isValidString(req.getParameter("password"))
                     || !CommonUtil.isValidString(req.getParameter("name"))
                     || !CommonUtil.isValidString(req.getParameter("dateOfBirth"))
                     || !CommonUtil.isValidString(req.getParameter("address"))
-                    || !CommonUtil.isValidString(req.getParameter("phone"))) {
+                    || !CommonUtil.isValidString(req.getParameter("phone"))
+                    || !CommonUtil.isValidString(req.getParameter("email"))) {
                 logger.info("createUser fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
 
-            String userName = req.getParameter("userName");
+            String userName = req.getParameter("username");
             boolean checkUserName = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).checkUser(userName);
             if (checkUserName == true) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.USER_EXIST);
             }
+            byte[] password = req.getParameter("password").getBytes("UTF-8");
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] encrypt = md5.digest(password);
 
-            byte[] password = req.getParameter("password").getBytes();
             String name = req.getParameter("name");
-            String dateOfBirth = req.getParameter("dateOfBirth");
             String address = req.getParameter("address");
             String phone = req.getParameter("phone");
-            Date dob = CommonUtil.getSQLDateFromString(dateOfBirth, "dd-MM-yyyy");
-            if (dob == null) {
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
-            }
+            String email = req.getParameter("email");
+            String dob = req.getParameter("dob");
 
-            EnUser newUser = new EnUser(userName, password, name, dob, address, phone);
+            EnUser newUser = new EnUser(userName, encrypt, name, dob, address, phone, email);
             int resultUser = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).createUser(newUser);
             if (resultUser == 0) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
@@ -145,13 +138,13 @@ public class LoginController extends ApiServlet {
 
     private EnApiOutput checkUser(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"userName"})
-                    || !CommonUtil.isValidString(req.getParameter("userName"))) {
+            if (!checkValidParam(req, new String[]{"username"})
+                    || !CommonUtil.isValidString(req.getParameter("username"))) {
                 logger.info("check User fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
 
-            String userName = req.getParameter("userName");
+            String userName = req.getParameter("username");
             boolean check = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).checkUser(userName);
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, check);
         } catch (Exception e) {
