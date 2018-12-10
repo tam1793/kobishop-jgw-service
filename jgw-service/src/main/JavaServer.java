@@ -53,7 +53,7 @@ public class JavaServer {
         context.addServlet(app.guest.controller.ProductController.class, "/products/*");
 
         //Servlet for User
-        context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
+//        context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
         //Servlet for Admin
         context.addServlet(AccountController.class, "/admin/account/*");
 

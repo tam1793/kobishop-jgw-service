@@ -31,10 +31,12 @@ public class EnApp {
 
     public static class EnUserPermission {
 
+        public Integer userId;
         public String userName;
         public String permission;
 
-        public EnUserPermission(String userName, String permission) {
+        public EnUserPermission(Integer userId, String userName, String permission) {
+            this.userId = userId;
             this.userName = userName;
             this.permission = permission;
         }
@@ -62,8 +64,9 @@ public class EnApp {
         }
 
     }
-    
+
     public static class EnProduct {
+
         public int id;
         public int typeId;
         public int brandId;
@@ -77,6 +80,7 @@ public class EnApp {
     }
 
     public static class EnOrder {
+
         public Date createDate;
         public int id;
         public String products;

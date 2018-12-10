@@ -37,14 +37,14 @@ public abstract class AbstractController extends ApiServlet {
                 logger.info("TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
-            return doProcess(verifiedUserName.userName, req, resp);
+            return doProcess(verifiedUserName, req, resp);
         } catch (Exception ex) {
             logger.error("AbstractController: " + ex.getMessage(), ex);
         }
         return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
-    protected abstract EnApiOutput doProcess(String userName, HttpServletRequest req, HttpServletResponse resp);
+    protected abstract EnApiOutput doProcess(EnUserPermission verifiedUserName, HttpServletRequest req, HttpServletResponse resp);
     //To change body of generated methods, choose Tools | Templates.
 
 }

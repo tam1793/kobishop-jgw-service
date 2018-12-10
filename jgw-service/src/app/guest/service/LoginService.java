@@ -73,7 +73,7 @@ public class LoginService {
                 logger.info("login false: USERNAME_OR_PASSWORD_INVALID");
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.USERNAME_OR_PASSWORD_INVALID);
             }
-            String token = createToken(new EnUserPermission(user.getUsername(), user.getRole()));
+            String token = createToken(new EnUserPermission(user.getId(), user.getUsername(), user.getRole()));
             EnUserSession rs = new EnUserSession(token, user.getUsername(), user.getRole());
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
 
@@ -97,7 +97,7 @@ public class LoginService {
                     .set(ACCOUNT.ADDRESS, newUser.address)
                     .set(ACCOUNT.PHONE, newUser.phone)
                     .set(ACCOUNT.ROLE, "user")
-                    .set(ACCOUNT.EMAIL,newUser.email)
+                    .set(ACCOUNT.EMAIL, newUser.email)
                     .execute();
             if (result > 0) {
                 logger.info("create user success:" + newUser);
