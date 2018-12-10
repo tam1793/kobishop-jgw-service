@@ -21,10 +21,10 @@ import org.apache.log4j.Logger;
 public class OrderController extends AbstractController {
 
     private final Logger logger = Logger.getLogger(OrderController.class);
-    
+
     @Override
-    protected EnApiOutput doProcess(String userName, HttpServletRequest req, HttpServletResponse resp) {
-    try {
+    protected EnApiOutput doProcess(EnApp.EnUserPermission verifiedUserName, HttpServletRequest req, HttpServletResponse resp) {
+        try {
             String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
 
             switch (pathInfo) {
@@ -49,7 +49,7 @@ public class OrderController extends AbstractController {
 
             String orderId = req.getParameter("orderId");
 
-            List <EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders(Integer.parseInt(orderId));
+            List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders(Integer.parseInt(orderId));
             if (!resultOrders.isEmpty()) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultOrders);
             } else {
@@ -61,5 +61,5 @@ public class OrderController extends AbstractController {
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
 
     }
-    
+
 }
