@@ -9,6 +9,8 @@ import app.config.ConfigApp;
 import app.entity.EnApp.*;
 import core.utilities.DBConnector;
 import java.sql.Connection;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -17,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import static org.jooq.impl.DSL.insertInto;
 
 /**
  *
@@ -51,16 +54,36 @@ public class OrderService {
         return instance;
     }
     
-    public List<EnOrder> getOrders(int orderId) {
+    public List<EnOrder> getOrders(int userId) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-//            Result<ProductRecord> record =
-            return create.fetch(Tables.ORDER, Tables.ORDER.ID.eq(orderId)).into(EnOrder.class);
+            return create.fetch(Tables.ORDER, Tables.ORDER.USERID.eq(userId)).into(EnOrder.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
         return null;
+    }
+    
+    public boolean addOrder(int userId, String items) {
+        Connection conn = null;
+        try {
+            conn = dbConnector.getMySqlConnection();
+            Date now = new Date();
+            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            int result = create.insertInto(Tables.ORDER, Tables.ORDER.CREATEDATE,Tables.ORDER.PRODUCTS,Tables.ORDER.STATE,Tables.ORDER.USERID)
+                               .values(new Timestamp(now.getTime()),items,"Chưa giao",userId).execute();
+            if (result > 0) {
+                logger.info("add order success with UserId: " + Integer.toString(userId) + "Items: " + items );
+                return true;
+            }
+            logger.info("add order fail with UserId: " + Integer.toString(userId) + "Items: " + items );
+            return false;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        logger.error("Database Error");
+        return false;
     }
 }

@@ -29,7 +29,9 @@ public class OrderController extends AbstractController {
 
             switch (pathInfo) {
                 case "/getOrders":
-                    return getOrders(req, resp);
+                    return getOrders(verifiedUserName.userId);
+                case "/addOrder":
+                        return addOrder(verifiedUserName.userId,req,resp);
                 default:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }
@@ -39,17 +41,9 @@ public class OrderController extends AbstractController {
         return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
-    private EnApiOutput getOrders(HttpServletRequest req, HttpServletResponse resp) {
+    private EnApiOutput getOrders(int userId) {
         try {
-            if (!checkValidParam(req, new String[]{"orderId"})
-                    || !CommonUtil.isInteger(req.getParameter("orderId"))) {
-                logger.info("getOrders fail: " + req.getParameter("orderId"));
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
-            }
-
-            String orderId = req.getParameter("orderId");
-
-            List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders(Integer.parseInt(orderId));
+            List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders(userId);
             if (!resultOrders.isEmpty()) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultOrders);
             } else {
@@ -61,5 +55,26 @@ public class OrderController extends AbstractController {
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
 
     }
+    private EnApiOutput addOrder(int userId,HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            if (!checkValidParam(req, new String[]{"items"})
+                    || !CommonUtil.isValidString(req.getParameter("items"))) {
+                logger.info("addOrder fail: " + req);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            
+            String items = req.getParameter("items");
+            boolean added = OrderService.getInstance().addOrder(userId,items);
+            
+            if (added) {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);
+            } else {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
+            }
 
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+    }
 }
