@@ -56,7 +56,7 @@ public class OrderService {
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            return create.selectFrom(Tables.ORDER).fetchInto(EnApp.EnOrder.class);
+            return create.selectFrom(Tables.ORDER).orderBy(Tables.ORDER.CREATEDATE.desc()).fetchInto(EnApp.EnOrder.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }

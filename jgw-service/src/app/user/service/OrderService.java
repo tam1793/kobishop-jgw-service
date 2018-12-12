@@ -19,7 +19,6 @@ import org.apache.log4j.Logger;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
-import static org.jooq.impl.DSL.insertInto;
 
 /**
  *

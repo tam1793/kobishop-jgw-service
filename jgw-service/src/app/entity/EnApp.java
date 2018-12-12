@@ -87,5 +87,14 @@ public class EnApp {
         public String state;
         public int userId;
     }
+    
+    public static class EnAccountInfo{
+        public String username;
+        public String name;
+        public String email;
+        public String birthday;
+        public String address;
+        public String phone;
+    }
 
 }

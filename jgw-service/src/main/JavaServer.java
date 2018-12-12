@@ -54,6 +54,7 @@ public class JavaServer {
 
         //Servlet for User
         context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
+        context.addServlet(app.user.controller.AccountController.class, "/user/account/*");
         
         //Servlet for Employee
         context.addServlet(app.employee.controller.OrderController.class, "/employee/order/*");
