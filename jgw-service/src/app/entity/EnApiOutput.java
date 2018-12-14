@@ -27,8 +27,12 @@ public class EnApiOutput extends ApiOutput {
         SERVER_ERROR(-1000, "SYSTEM_ERROR"),
         //PRODUCT
         PRODUCT_NOT_FOUND(-101, "PRODUCT_NOT_FOUND"),
+        //BRAND
+        BRAND_NOT_FOUND(-102, "BRAND_NOT_FOUND"),
+        //TYPE
+        TYPE_NOT_FOUND(-103, "TYPE_NOT_FOUND"),
         //ORDER
-        ORDER_NOT_FOUND(-102,"ORDER_NOT_FOUND");
+        ORDER_NOT_FOUND(-104,"ORDER_NOT_FOUND");
         public int code;
         public String message;
 

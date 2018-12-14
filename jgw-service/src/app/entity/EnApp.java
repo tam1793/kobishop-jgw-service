@@ -96,5 +96,15 @@ public class EnApp {
         public String address;
         public String phone;
     }
+    
+    public static class EnBrand {
+        public int id;
+        public String name;
+    }
+    
+    public static class EnType {
+        public int id;
+        public String name;
+    }
 
 }
