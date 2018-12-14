@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.user.service;
+package app.employee.service;
 
 import app.config.ConfigApp;
-import app.entity.EnApp.*;
+import app.entity.EnApp;
 import core.utilities.DBConnector;
 import java.sql.Connection;
-import java.util.Date;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -25,9 +23,9 @@ import org.jooq.impl.DSL;
  * @author Lenovo
  */
 public class OrderService {
-    private static final Logger logger = Logger.getLogger(OrderService.class.getName());
+    private static final Logger logger = Logger.getLogger(app.employee.service.OrderService.class.getName());
     private static final Lock LOCK = new ReentrantLock();
-    private static OrderService instance = null;
+    private static app.employee.service.OrderService instance = null;
 
     private final DBConnector dbConnector;
 
@@ -39,12 +37,12 @@ public class OrderService {
                 ConfigApp.MYSQL_PASSWORD);
     }
 
-    public static OrderService getInstance() {
+    public static app.employee.service.OrderService getInstance() {
         if (instance == null) {
             LOCK.lock();
             try {
                 if (instance == null) {
-                    instance = new OrderService();
+                    instance = new app.employee.service.OrderService();
                 }
             } finally {
                 LOCK.unlock();
@@ -53,31 +51,32 @@ public class OrderService {
         return instance;
     }
     
-    public List<EnOrder> getOrders(int userId) {
+    public List<EnApp.EnOrder> getOrders() {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            return create.fetch(Tables.ORDER, Tables.ORDER.USERID.eq(userId)).into(EnOrder.class);
+            return create.selectFrom(Tables.ORDER).orderBy(Tables.ORDER.CREATEDATE.desc()).fetchInto(EnApp.EnOrder.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
         return null;
     }
     
-    public boolean addOrder(int userId, String items) {
+    public boolean modifyOrder(int orderId, String orderStatus) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
-            Date now = new Date();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            int result = create.insertInto(Tables.ORDER, Tables.ORDER.CREATEDATE,Tables.ORDER.PRODUCTS,Tables.ORDER.STATE,Tables.ORDER.USERID)
-                               .values(new Timestamp(now.getTime()),items,"Chưa giao",userId).execute();
+            int result = create.update(Tables.ORDER)
+                                .set(Tables.ORDER.STATE,orderStatus)
+                                .where(Tables.ORDER.ID.eq(orderId))
+                                .execute();
             if (result > 0) {
-                logger.info("add order success with UserId: " + Integer.toString(userId) + "Items: " + items );
+                logger.info("modify order success with OrderId: " + Integer.toString(orderId) + "OrderStatus: " + orderStatus );
                 return true;
             }
-            logger.info("add order fail with UserId: " + Integer.toString(userId) + "Items: " + items );
+            logger.info("modify order fail with OrderId: " + Integer.toString(orderId) + "OrderStatus: " + orderStatus );
             return false;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

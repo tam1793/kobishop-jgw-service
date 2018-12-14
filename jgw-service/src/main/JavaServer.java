@@ -51,9 +51,17 @@ public class JavaServer {
         //Servlet for Guest
         context.addServlet(LoginController.class, "/auth/*");
         context.addServlet(app.guest.controller.ProductController.class, "/products/*");
+        context.addServlet(app.guest.controller.BrandController.class, "/brands/*");
+        context.addServlet(app.guest.controller.TypeController.class, "/types/*");
+        
 
         //Servlet for User
-//        context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
+        context.addServlet(app.user.controller.OrderController.class, "/user/order/*");
+        context.addServlet(app.user.controller.AccountController.class, "/user/account/*");
+        
+        //Servlet for Employee
+        context.addServlet(app.employee.controller.OrderController.class, "/employee/order/*");
+        
         //Servlet for Admin
         context.addServlet(AccountController.class, "/admin/account/*");
 
