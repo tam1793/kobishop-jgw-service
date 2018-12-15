@@ -10,6 +10,7 @@ import app.entity.EnApp;
 import app.guest.service.BrandService;
 import core.controller.ApiServlet;
 import core.utilities.CommonUtil;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,14 +43,14 @@ public class BrandController extends ApiServlet {
 
     private EnApiOutput getAllBrand() {
         List<EnApp.EnBrand> rs = BrandService.getInstance().getBrandList();
+        HashMap<String, Object> result = new HashMap<String, Object>();
         if (!rs.isEmpty()) {
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
+            //xử lý nếu rs == null ?
+            result.put("listBrands", rs);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } else {
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.BRAND_NOT_FOUND);
         }
     }
 
 }
- 
-    
-

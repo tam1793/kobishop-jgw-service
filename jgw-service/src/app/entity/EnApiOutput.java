@@ -6,6 +6,7 @@
 package app.entity;
 
 import core.controller.ApiOutput;
+import java.util.HashMap;
 
 /**
  *
@@ -32,7 +33,7 @@ public class EnApiOutput extends ApiOutput {
         //TYPE
         TYPE_NOT_FOUND(-103, "TYPE_NOT_FOUND"),
         //ORDER
-        ORDER_NOT_FOUND(-104,"ORDER_NOT_FOUND");
+        ORDER_NOT_FOUND(-104, "ORDER_NOT_FOUND");
         public int code;
         public String message;
 
@@ -43,14 +44,14 @@ public class EnApiOutput extends ApiOutput {
     }
 
     public EnApiOutput(ERROR_CODE_API result) {
-        super(result.code, result.message, null);
+        super(result.code, result.message, new HashMap<String, Object>());
     }
 
-    public EnApiOutput(int code, String message, Object data) {
+    public EnApiOutput(int code, String message, HashMap<String, Object> data) {
         super(code, message, data);
     }
 
-    public EnApiOutput(ERROR_CODE_API result, Object data) {
+    public EnApiOutput(ERROR_CODE_API result, HashMap<String, Object> data) {
         super(result.code, result.message, data);
     }
 

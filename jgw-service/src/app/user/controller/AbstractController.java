@@ -6,7 +6,7 @@
 package app.user.controller;
 
 import app.entity.EnApiOutput;
-import app.guest.service.VerifyUserNameService;
+import app.guest.service.VerifyUserService;
 import app.config.ConfigApp;
 import app.entity.EnApp.*;
 import core.controller.ApiServlet;
@@ -22,26 +22,26 @@ import org.apache.log4j.Logger;
 public abstract class AbstractController extends ApiServlet {
 
     private final Logger logger = Logger.getLogger(AbstractController.class);
-    VerifyUserNameService verifyInstance = VerifyUserNameService.getInstance(ConfigApp.LOGIN_SECRET_KEY);
+    VerifyUserService verifyInstance = VerifyUserService.getInstance(ConfigApp.LOGIN_SECRET_KEY);
 
     @Override
     protected Object execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
             if (!checkValidParam(req, new String[]{"token"})
                     || !CommonUtil.isValidString(req.getParameter("token"))) {
-                return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
             String token = req.getParameter("token");
-            EnUserPermission verifiedUserName = verifyInstance.verifiedUserName(token);
-            if (verifiedUserName == null) {
+            EnUserPermission verifiedUser = verifyInstance.verifiedUser(token);
+            if (verifiedUser == null) {
                 logger.info("TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
-            return doProcess(verifiedUserName, req, resp);
+            return doProcess(verifiedUser, req, resp);
         } catch (Exception ex) {
             logger.error("AbstractController: " + ex.getMessage(), ex);
         }
-        return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
     protected abstract EnApiOutput doProcess(EnUserPermission verifiedUserName, HttpServletRequest req, HttpServletResponse resp);

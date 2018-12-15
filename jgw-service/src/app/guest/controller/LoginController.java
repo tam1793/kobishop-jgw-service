@@ -8,12 +8,13 @@ package app.guest.controller;
 import app.entity.EnApiOutput;
 import app.entity.EnApp.EnUser;
 import app.guest.service.LoginService;
-import app.guest.service.VerifyUserNameService;
+import app.guest.service.VerifyUserService;
 import app.config.ConfigApp;
 import app.entity.EnApp.*;
 import core.controller.ApiServlet;
 import core.utilities.CommonUtil;
 import java.security.MessageDigest;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ import org.apache.log4j.Logger;
 public class LoginController extends ApiServlet {
 
     private final Logger logger = Logger.getLogger(LoginController.class);
-    VerifyUserNameService verifyInstance = VerifyUserNameService.getInstance(ConfigApp.LOGIN_SECRET_KEY);
+    VerifyUserService verifyInstance = VerifyUserService.getInstance(ConfigApp.LOGIN_SECRET_KEY);
 
     @Override
     protected EnApiOutput execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -47,7 +48,7 @@ public class LoginController extends ApiServlet {
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
-        return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
     private EnApiOutput login(HttpServletRequest req, HttpServletResponse resp) {
@@ -76,31 +77,31 @@ public class LoginController extends ApiServlet {
         try {
             if (!checkValidParam(req, new String[]{"token"})
                     || !CommonUtil.isValidString(req.getParameter("token"))) {
-                return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
+            HashMap<String, Object> result = new HashMap<String, Object>();
+
             String token = req.getParameter("token");
-            EnUserPermission verifiedUserName = verifyInstance.verifiedUserName(token);
-            if (verifiedUserName == null) {
+            EnUserPermission verifiedUser = verifyInstance.verifiedUser(token);
+            if (verifiedUser == null) {
                 logger.info("LOGIN_TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, verifiedUserName);
+            result.put("user", verifiedUser);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
-        return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
     private EnApiOutput createUser(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"username", "password", "name", "dateOfBirth", "address", "phone", "email"})
+            if (!checkValidParam(req, new String[]{"username", "password", "name", "email"})
                     || !CommonUtil.isValidString(req.getParameter("username"))
                     || !CommonUtil.isValidString(req.getParameter("password"))
                     || !CommonUtil.isValidString(req.getParameter("name"))
-                    || !CommonUtil.isValidString(req.getParameter("dateOfBirth"))
-                    || !CommonUtil.isValidString(req.getParameter("address"))
-                    || !CommonUtil.isValidString(req.getParameter("phone"))
                     || !CommonUtil.isValidString(req.getParameter("email"))) {
                 logger.info("createUser fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
@@ -116,12 +117,9 @@ public class LoginController extends ApiServlet {
             byte[] encrypt = md5.digest(password);
 
             String name = req.getParameter("name");
-            String address = req.getParameter("address");
-            String phone = req.getParameter("phone");
             String email = req.getParameter("email");
-            String dob = req.getParameter("dob");
 
-            EnUser newUser = new EnUser(userName, encrypt, name, dob, address, phone, email);
+            EnUser newUser = new EnUser(userName, encrypt, name, email);
             int resultUser = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).createUser(newUser);
             if (resultUser == 0) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
@@ -143,10 +141,12 @@ public class LoginController extends ApiServlet {
                 logger.info("check User fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
+            HashMap<String, Object> result = new HashMap<String, Object>();
 
             String userName = req.getParameter("username");
             boolean check = LoginService.getInstance(ConfigApp.LOGIN_SECRET_KEY).checkUser(userName);
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, check);
+            result.put("checkUser", check);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

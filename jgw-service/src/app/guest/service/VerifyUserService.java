@@ -20,34 +20,34 @@ import org.apache.log4j.Logger;
  *
  * @author tam
  */
-public class VerifyUserNameService {
+public class VerifyUserService {
 
-    private static final Logger logger = Logger.getLogger(VerifyUserNameService.class.getName());
+    private static final Logger logger = Logger.getLogger(VerifyUserService.class.getName());
     private static final Lock createLock = new ReentrantLock();
-    private static final Map<String, VerifyUserNameService> instances = new HashMap();
+    private static final Map<String, VerifyUserService> instances = new HashMap();
 
     private static String loginSecret;
 
-    public static VerifyUserNameService getInstance(String loginSecret) {
+    public static VerifyUserService getInstance(String loginSecret) {
         String key = loginSecret;
         if (!instances.containsKey(key)) {
             createLock.lock();
             try {
                 if (!instances.containsKey(key)) {
-                    instances.put(key, new VerifyUserNameService(loginSecret));
+                    instances.put(key, new VerifyUserService(loginSecret));
                 }
             } finally {
                 createLock.unlock();
             }
         }
-        return (VerifyUserNameService) instances.get(key);
+        return (VerifyUserService) instances.get(key);
     }
 
-    private VerifyUserNameService(String loginSecret) {
+    private VerifyUserService(String loginSecret) {
         this.loginSecret = loginSecret;
     }
 
-    public EnUserPermission verifiedUserName(String token) {
+    public EnUserPermission verifiedUser(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(loginSecret).parseClaimsJws(token);
             Gson googleJson = new Gson();

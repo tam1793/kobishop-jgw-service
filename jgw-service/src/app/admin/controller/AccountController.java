@@ -37,16 +37,17 @@ public class AccountController extends AbstractAdminController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
     private EnApiOutput insertAdmin(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"username", "password", "name", "role"})
+            if (!checkValidParam(req, new String[]{"username", "password", "name", "role", "email"})
                     || !CommonUtil.isValidString(req.getParameter("username"))
                     || !CommonUtil.isValidString(req.getParameter("password"))
                     || !CommonUtil.isValidString(req.getParameter("name"))
-                    || !CommonUtil.isValidString(req.getParameter("role"))) {
+                    || !CommonUtil.isValidString(req.getParameter("role"))
+                    || !CommonUtil.isValidString(req.getParameter("email"))) {
                 logger.info("insertAdmin fail: " + req);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
@@ -61,8 +62,9 @@ public class AccountController extends AbstractAdminController {
 
             String name = req.getParameter("name");
             String role = req.getParameter("role");
+            String email = req.getParameter("email");
 
-            int resultUser = AccountService.getInstance().insertByAdmin(userName, password, name, role);
+            int resultUser = AccountService.getInstance().insertByAdmin(userName, password, name, role, email);
             switch (resultUser) {
                 case 1:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);

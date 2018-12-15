@@ -8,6 +8,7 @@ package app.user.controller;
 import app.entity.EnApiOutput;
 import app.entity.EnApp;
 import app.user.service.AccountService;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
  *
  * @author Lenovo
  */
-public class AccountController extends AbstractController{
+public class AccountController extends AbstractController {
 
     private final Logger logger = Logger.getLogger(AccountController.class);
 
@@ -35,14 +36,18 @@ public class AccountController extends AbstractController{
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-        return new EnApiOutput(null, EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
     private EnApiOutput getInfo(int userId) {
         try {
+            HashMap<String, Object> result = new HashMap<String, Object>();
+
             List<EnApp.EnAccountInfo> resultInfo = AccountService.getInstance().getInfo(userId);
+            //xử lý nếu resultInfo == null ?
             if (!resultInfo.isEmpty()) {
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultInfo);
+                result.put("info", resultInfo);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.ORDER_NOT_FOUND);
             }
@@ -52,5 +57,5 @@ public class AccountController extends AbstractController{
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
 
     }
-    
+
 }

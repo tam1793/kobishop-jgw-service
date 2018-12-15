@@ -8,49 +8,50 @@ package core.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.Serializable;
+import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author 
+ * @author
  */
 public class ApiOutput implements Serializable {
 
     public int returnCode;
     public String returnMessage;
-    public Object data;
+    public HashMap<String, Object> data;
 
-    public ApiOutput(int returnCode, String returnMessage, Object data) {
+    public ApiOutput(int returnCode, String returnMessage, HashMap<String, Object> data) {
         this.returnCode = returnCode;
         this.returnMessage = returnMessage;
-        this.data = setData(data);
+        this.data = data;
     }
 
-    private Object setData(Object data) {
-        try {
-            if (data != null) {
-                JSONObject ret = null;
-                try {
-
-                    if (data instanceof String) {
-                        ret = (JSONObject) new JSONParser().parse((String) data);
-                    } else {
-                        String dataString = new GsonBuilder().create().toJson(data);
-                        ret = (JSONObject) new JSONParser().parse(dataString);
-                    }
-
-                } catch (ParseException e) {
-                }
-                if (ret != null) {
-                    data = ret;
-                }
-            }
-        } catch (Exception ex) {
-        }
-        return data;
-    }
+//    private Object setData(Object data) {
+//        try {
+//            if (data != null) {
+//                JSONObject ret = null;
+//                try {
+//
+//                    if (data instanceof String) {
+//                        ret = (JSONObject) new JSONParser().parse((String) data);
+//                    } else {
+//                        String dataString = new GsonBuilder().create().toJson(data);
+//                        ret = (JSONObject) new JSONParser().parse(dataString);
+//                    }
+//
+//                } catch (ParseException e) {
+//                }
+//                if (ret != null) {
+//                    data = ret;
+//                }
+//            }
+//        } catch (Exception ex) {
+//        }
+//        return data;
+//    }
 
     public String toJString() {
 //        Gson gson = new GsonBuilder().setPrettyPrinting().create();

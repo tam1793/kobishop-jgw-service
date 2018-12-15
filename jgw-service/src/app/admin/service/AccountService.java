@@ -50,7 +50,7 @@ public class AccountService {
         return instance;
     }
 
-    public int insertByAdmin(String userName, byte[] password, String name, String role) {
+    public int insertByAdmin(String userName, byte[] password, String name, String role, String email) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
@@ -60,7 +60,9 @@ public class AccountService {
                     .set(ACCOUNT.USERNAME, userName)
                     .set(ACCOUNT.PASSWORD, password)
                     .set(ACCOUNT.NAME, name)
-                    .set(ACCOUNT.ROLE, role).execute();
+                    .set(ACCOUNT.ROLE, role)
+                    .set(ACCOUNT.EMAIL, email)
+                    .execute();
             if (result > 0) {
                 logger.info("create admin success:" + userName + "--" + password);
                 return 1;

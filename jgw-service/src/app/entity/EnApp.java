@@ -63,6 +63,13 @@ public class EnApp {
             this.email = email;
         }
 
+        public EnUser(String userName, byte[] password, String name, String email) {
+            this.userName = userName;
+            this.password = password;
+            this.name = name;
+            this.email = email;
+        }
+
     }
 
     public static class EnProduct {
@@ -87,8 +94,9 @@ public class EnApp {
         public String state;
         public int userId;
     }
-    
-    public static class EnAccountInfo{
+
+    public static class EnAccountInfo {
+
         public String username;
         public String name;
         public String email;
@@ -96,15 +104,38 @@ public class EnApp {
         public String address;
         public String phone;
     }
-    
+
     public static class EnBrand {
+
         public int id;
         public String name;
     }
-    
+
     public static class EnType {
+
         public int id;
         public String name;
+    }
+
+    public static enum EnPriceOption {
+
+        OPTION_1(0, 10000000),
+        OPTION_2(10000000, 15000000),
+        OPTION_3(15000000, 20000000),
+        OPTION_4(20000000, Integer.MAX_VALUE);
+
+        public Integer lowest;
+        public Integer highest;
+
+        EnPriceOption(Integer lowest, Integer highest) {
+            this.lowest = lowest;
+            this.highest = highest;
+        }
+
+        public static EnPriceOption getEnPriceOption(String option) {
+            return EnPriceOption.valueOf(option);
+        }
+
     }
 
 }

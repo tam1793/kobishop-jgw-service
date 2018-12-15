@@ -73,9 +73,12 @@ public class LoginService {
                 logger.info("login false: USERNAME_OR_PASSWORD_INVALID");
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.USERNAME_OR_PASSWORD_INVALID);
             }
+            HashMap<String, Object> result = new HashMap<String, Object>();
+
             String token = createToken(new EnUserPermission(user.getId(), user.getUsername(), user.getRole()));
             EnUserSession rs = new EnUserSession(token, user.getUsername(), user.getRole());
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
+            result.put("session", rs);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -93,9 +96,6 @@ public class LoginService {
                     .set(ACCOUNT.USERNAME, newUser.userName)
                     .set(ACCOUNT.PASSWORD, newUser.password)
                     .set(ACCOUNT.NAME, newUser.name)
-                    .set(ACCOUNT.BIRTHDAY, newUser.dob)
-                    .set(ACCOUNT.ADDRESS, newUser.address)
-                    .set(ACCOUNT.PHONE, newUser.phone)
                     .set(ACCOUNT.ROLE, "user")
                     .set(ACCOUNT.EMAIL, newUser.email)
                     .execute();

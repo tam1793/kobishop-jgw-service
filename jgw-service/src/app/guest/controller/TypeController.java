@@ -9,6 +9,7 @@ import app.entity.EnApiOutput;
 import app.entity.EnApp;
 import app.guest.service.TypeService;
 import core.controller.ApiServlet;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,12 +41,16 @@ public class TypeController extends ApiServlet {
     }
 
     private EnApiOutput getAllType() {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
         List<EnApp.EnType> rs = TypeService.getInstance().getTypeList();
+        //xử lú nếu rs == null
         if (!rs.isEmpty()) {
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
+            result.put("listType", rs);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } else {
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.TYPE_NOT_FOUND);
         }
     }
-    
+
 }

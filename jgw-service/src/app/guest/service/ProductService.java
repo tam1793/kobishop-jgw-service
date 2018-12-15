@@ -14,16 +14,11 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import kobishop.Tables;
-import kobishop.tables.Product;
 import static kobishop.tables.Product.PRODUCT;
-import kobishop.tables.records.ProductRecord;
 import org.apache.log4j.Logger;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
 import org.jooq.SQLDialect;
-import org.jooq.Table;
 import org.jooq.impl.DSL;
 import static org.jooq.impl.DSL.trueCondition;
 
@@ -91,7 +86,13 @@ public class ProductService {
                 condition = condition.and(PRODUCT.TYPEID.eq(Integer.parseInt(typeId)));
             }
 
-//            Result<ProductRecord> record =
+            if (CommonUtil.isValidString(priceOption)) {
+                EnPriceOption option = EnPriceOption.getEnPriceOption(priceOption);
+                if (option != null) {
+                   condition = condition.and(PRODUCT.PRICE.between(option.lowest, option.highest));
+                }
+            }
+
             return create.select().from(PRODUCT).where(condition).limit(productsPerPage).offset(page * productsPerPage).fetch().into(EnProduct.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -101,7 +102,7 @@ public class ProductService {
 
     public static void main(String[] args) {
         ConfigApp.init();
-        System.out.println(CommonUtil.objectToString(ProductService.getInstance().getListProduct("", "1", "", "", 0, 100)));
+        System.out.println(CommonUtil.objectToString(ProductService.getInstance().getListProduct("", "1", "", "OPTION_2", 0, 100)));
     }
 
 }

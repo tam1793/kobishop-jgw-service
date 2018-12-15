@@ -10,6 +10,7 @@ import app.entity.EnApp;
 import app.guest.service.ProductService;
 import core.controller.ApiServlet;
 import core.utilities.CommonUtil;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,7 @@ public class ProductController extends ApiServlet {
 
             switch (pathInfo) {
                 case "":
-                    return getAllProduct(req);
+                    return getProducts(req);
                 default:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }
@@ -40,13 +41,14 @@ public class ProductController extends ApiServlet {
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
-    private EnApiOutput getAllProduct(HttpServletRequest req) {
-//        List<EnApp.EnProduct> rs = ProductService.getInstance().getListProduct();
+    private EnApiOutput getProducts(HttpServletRequest req) {
         if (!CommonUtil.checkValidParam(req, new String[]{"page", "productsPerPage"})
                 || !CommonUtil.isInteger(req.getParameter("page"))
-                || !CommonUtil.isInteger("productsPerPage")) {
+                || !CommonUtil.isInteger(req.getParameter("productsPerPage"))) {
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
         }
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
         String productName = req.getParameter("productName");
         String brandId = req.getParameter("brandId");
         String typeId = req.getParameter("typeId");
@@ -56,8 +58,9 @@ public class ProductController extends ApiServlet {
 
         List<EnApp.EnProduct> rs = ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage);
 
-        if (!rs.isEmpty()) {
-            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, rs);
+        if (rs != null && !rs.isEmpty()) {
+            result.put("listProducts", rs);
+            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } else {
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.PRODUCT_NOT_FOUND);
         }
