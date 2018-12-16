@@ -32,22 +32,21 @@ public class ProductController extends ApiServlet {
         try {
             String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
 
-            Pattern pattern = Pattern.compile(PATTERNT);
-            Matcher matcher = pattern.matcher(pathInfo);
-            String id = null;
-            if (matcher.find()) {
-                id = matcher.group("id").trim();
-            }
-            if (CommonUtil.isInteger(id)) {
-                return getProduct(Integer.parseInt(id));
-            }
-
             switch (pathInfo) {
                 case "":
                     return getProducts(req);
                 case "/newest":
                     return getNewestProducts(req);
                 default:
+                    Pattern pattern = Pattern.compile(PATTERNT);
+                    Matcher matcher = pattern.matcher(pathInfo);
+                    String id = null;
+                    if (matcher.find()) {
+                        id = matcher.group("id").trim();
+                    }
+                    if (CommonUtil.isInteger(id)) {
+                        return getProduct(Integer.parseInt(id));
+                    }
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }
         } catch (Exception ex) {
@@ -64,7 +63,6 @@ public class ProductController extends ApiServlet {
                 logger.error("getProducts - params invalid - page: " + req.getParameter("page") + " - productsPerPage: " + req.getParameter("productsPerPage"));
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
-            HashMap<String, Object> result = new HashMap<String, Object>();
 
             String productName = req.getParameter("productName");
             String brandId = req.getParameter("brandId");
@@ -73,14 +71,22 @@ public class ProductController extends ApiServlet {
             int page = Integer.parseInt(req.getParameter("page"));
             int productsPerPage = Integer.parseInt(req.getParameter("productsPerPage"));
 
-            List<EnApp.EnProduct> rs = ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage);
+            HashMap<String, Object> result = ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage);
 
-            if (rs != null && !rs.isEmpty()) {
-                result.put("listProducts", rs);
+            if (result != null) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.PRODUCT_NOT_FOUND);
             }
+//            return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage));
+//            List<EnApp.EnProduct> rs = ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage);
+//
+//            if (rs != null && !rs.isEmpty()) {
+//                result.put("listProducts", rs);
+//                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
+//            } else {
+//                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.PRODUCT_NOT_FOUND);
+//            }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }

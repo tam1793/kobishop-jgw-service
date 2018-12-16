@@ -10,6 +10,7 @@ import app.entity.EnApp.*;
 import core.utilities.CommonUtil;
 import core.utilities.DBConnector;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,6 +20,7 @@ import kobishop.tables.records.ProductRecord;
 import org.apache.log4j.Logger;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import static org.jooq.impl.DSL.trueCondition;
@@ -70,7 +72,7 @@ public class ProductService {
         return null;
     }
 
-    public List<EnProduct> getListProduct(String productName, String brandId, String typeId, String priceOption, int page, int productsPerPage) {
+    public HashMap<String, Object> getListProduct(String productName, String brandId, String typeId, String priceOption, int page, int productsPerPage) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
@@ -94,7 +96,15 @@ public class ProductService {
                 }
             }
 
-            return create.select().from(PRODUCT).where(condition).limit(productsPerPage).offset(page * productsPerPage).fetch().into(EnProduct.class);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            List<EnProduct> list = create.selectFrom(PRODUCT).where(condition).fetch().into(EnProduct.class);
+            int sizeList = list.size();
+            List<EnProduct> sub = list.subList(page * productsPerPage, (page + 1) * productsPerPage);
+            map.put("numberOfPage", sizeList % productsPerPage != 0 ? sizeList / productsPerPage : sizeList / productsPerPage - 1);
+            map.put("listProducts", sub);
+            return map;
+
+//            return create.select().from(PRODUCT).where(condition).limit(productsPerPage).offset(page * productsPerPage).fetch().into(EnProduct.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
