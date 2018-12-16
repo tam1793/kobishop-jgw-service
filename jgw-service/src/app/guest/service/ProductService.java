@@ -15,6 +15,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import kobishop.Tables;
 import static kobishop.tables.Product.PRODUCT;
+import kobishop.tables.records.ProductRecord;
 import org.apache.log4j.Logger;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
@@ -77,7 +78,7 @@ public class ProductService {
 
             Condition condition = trueCondition();
             if (CommonUtil.isValidString(productName)) {
-                condition = condition.and(PRODUCT.NAME.eq(productName));
+                condition = condition.and(PRODUCT.NAME.contains(productName));
             }
             if (CommonUtil.isInteger(brandId)) {
                 condition = condition.and(PRODUCT.BRANDID.eq(Integer.parseInt(brandId)));
@@ -89,7 +90,7 @@ public class ProductService {
             if (CommonUtil.isValidString(priceOption)) {
                 EnPriceOption option = EnPriceOption.getEnPriceOption(priceOption);
                 if (option != null) {
-                   condition = condition.and(PRODUCT.PRICE.between(option.lowest, option.highest));
+                    condition = condition.and(PRODUCT.PRICE.between(option.lowest, option.highest));
                 }
             }
 
@@ -100,9 +101,39 @@ public class ProductService {
         return null;
     }
 
-    public static void main(String[] args) {
-        ConfigApp.init();
-        System.out.println(CommonUtil.objectToString(ProductService.getInstance().getListProduct("", "1", "", "OPTION_2", 0, 100)));
+    public List<EnProduct> getNewestProducts() {
+        Connection conn = null;
+        try {
+            conn = dbConnector.getMySqlConnection();
+            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+
+            return create.select().from(PRODUCT).orderBy(PRODUCT.ID.desc()).limit(5).fetch().into(EnProduct.class);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return null;
     }
 
+    public EnProduct getProductbyId(int id) {
+        Connection conn = null;
+        try {
+            conn = dbConnector.getMySqlConnection();
+            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            ProductRecord record = create.selectFrom(PRODUCT).where(PRODUCT.ID.eq(id)).fetchOne();
+            if (record != null) {
+                return record.into(EnProduct.class);
+            }
+            logger.error("getProductbyId null - id: " + id);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        ConfigApp.init();
+//        System.out.println(CommonUtil.objectToString(ProductService.getInstance().getNewestProducts()));
+        System.out.println(CommonUtil.objectToString(ProductService.getInstance().getProductbyId(300)));
+
+    }
 }
