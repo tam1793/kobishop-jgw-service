@@ -46,7 +46,7 @@ public class OrderController extends AbstractEmployeeController {
         try {
             List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders();
             HashMap<String, Object> result = new HashMap<String, Object>();
-            if (!resultOrders.isEmpty()) {
+            if (resultOrders!=null && !resultOrders.isEmpty()) {
                 result.put("listOrders", resultOrders);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {

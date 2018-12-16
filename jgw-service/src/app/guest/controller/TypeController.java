@@ -44,8 +44,7 @@ public class TypeController extends ApiServlet {
         HashMap<String, Object> result = new HashMap<String, Object>();
 
         List<EnApp.EnType> rs = TypeService.getInstance().getTypeList();
-        //xử lú nếu rs == null
-        if (!rs.isEmpty()) {
+        if (rs!=null && !rs.isEmpty()) {
             result.put("listType", rs);
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } else {

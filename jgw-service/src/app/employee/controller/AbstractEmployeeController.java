@@ -37,6 +37,10 @@ public abstract class AbstractEmployeeController extends ApiServlet {
                 logger.info("TOKEN_INVALID" + resp);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.LOGIN_TOKEN_INVALID);
             }
+            if (!verifiedUser.permission.equals("employee")) {
+                logger.info("Permission denied" + resp);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.PERMISSION_DENY);
+            }
             return doProcess(verifiedUser, req, resp);
 
         } catch (Exception ex) {

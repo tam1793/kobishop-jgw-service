@@ -44,8 +44,7 @@ public class AccountController extends AbstractController {
             HashMap<String, Object> result = new HashMap<String, Object>();
 
             List<EnApp.EnAccountInfo> resultInfo = AccountService.getInstance().getInfo(userId);
-            //xử lý nếu resultInfo == null ?
-            if (!resultInfo.isEmpty()) {
+            if (resultInfo!=null && !resultInfo.isEmpty()) {
                 result.put("info", resultInfo);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {

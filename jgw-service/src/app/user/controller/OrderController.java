@@ -47,8 +47,7 @@ public class OrderController extends AbstractController {
             HashMap<String, Object> result = new HashMap<String, Object>();
 
             List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders(userId);
-            //xử lý nếu resultOrders == null ?
-            if (!resultOrders.isEmpty()) {
+            if (resultOrders!=null && !resultOrders.isEmpty()) {
                 result.put("listOrders", resultOrders);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {

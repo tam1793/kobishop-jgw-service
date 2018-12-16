@@ -44,8 +44,7 @@ public class BrandController extends ApiServlet {
     private EnApiOutput getAllBrand() {
         List<EnApp.EnBrand> rs = BrandService.getInstance().getBrandList();
         HashMap<String, Object> result = new HashMap<String, Object>();
-        if (!rs.isEmpty()) {
-            //xử lý nếu rs == null ?
+        if (rs!=null && !rs.isEmpty()) {
             result.put("listBrands", rs);
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
         } else {
