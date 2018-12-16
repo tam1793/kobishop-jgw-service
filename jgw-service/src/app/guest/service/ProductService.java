@@ -99,8 +99,8 @@ public class ProductService {
             HashMap<String, Object> map = new HashMap<String, Object>();
             List<EnProduct> list = create.selectFrom(PRODUCT).where(condition).fetch().into(EnProduct.class);
             int sizeList = list.size();
-            List<EnProduct> sub = list.subList(page * productsPerPage, (page + 1) * productsPerPage);
-            map.put("numberOfPage", sizeList % productsPerPage != 0 ? sizeList / productsPerPage : sizeList / productsPerPage - 1);
+            List<EnProduct> sub = list.subList((page - 1) * productsPerPage, page * productsPerPage <= sizeList ? productsPerPage : sizeList);
+            map.put("numberOfPage", sizeList % productsPerPage != 0 ? sizeList / productsPerPage + 1 : sizeList / productsPerPage);
             map.put("listProducts", sub);
             return map;
 

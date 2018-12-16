@@ -23,15 +23,15 @@ import org.apache.log4j.Logger;
  * @author tamnnq
  */
 public class ProductController extends ApiServlet {
-
+    
     private final Logger logger = Logger.getLogger(ProductController.class);
     private final String PATTERNT = "/(?<id>\\d+)";
-
+    
     @Override
     protected EnApiOutput execute(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String pathInfo = req.getPathInfo() == null ? "" : req.getPathInfo();
-
+            
             switch (pathInfo) {
                 case "":
                     return getProducts(req);
@@ -54,7 +54,7 @@ public class ProductController extends ApiServlet {
         }
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
-
+    
     private EnApiOutput getProducts(HttpServletRequest req) {
         try {
             if (!CommonUtil.checkValidParam(req, new String[]{"page", "productsPerPage"})
@@ -63,16 +63,20 @@ public class ProductController extends ApiServlet {
                 logger.error("getProducts - params invalid - page: " + req.getParameter("page") + " - productsPerPage: " + req.getParameter("productsPerPage"));
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
-
+            
             String productName = req.getParameter("productName");
             String brandId = req.getParameter("brandId");
             String typeId = req.getParameter("typeId");
             String priceOption = req.getParameter("priceOption");
             int page = Integer.parseInt(req.getParameter("page"));
             int productsPerPage = Integer.parseInt(req.getParameter("productsPerPage"));
-
+            if (page < 1 || productsPerPage < 1) {
+                logger.error("check param page & productsPerPage invalid - page: " + page + " - productsPerPage: " + productsPerPage);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            
             HashMap<String, Object> result = ProductService.getInstance().getListProduct(productName, brandId, typeId, priceOption, page, productsPerPage);
-
+            
             if (result != null) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
             } else {
@@ -92,13 +96,13 @@ public class ProductController extends ApiServlet {
         }
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
-
+    
     private EnApiOutput getNewestProducts(HttpServletRequest req) {
         try {
             HashMap<String, Object> result = new HashMap<String, Object>();
-
+            
             List<EnApp.EnProduct> rs = ProductService.getInstance().getNewestProducts();
-
+            
             if (rs != null && !rs.isEmpty()) {
                 result.put("listProducts", rs);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
@@ -110,13 +114,13 @@ public class ProductController extends ApiServlet {
         }
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
-
+    
     private EnApiOutput getProduct(Integer id) {
         try {
             HashMap<String, Object> result = new HashMap<String, Object>();
-
+            
             EnApp.EnProduct rs = ProductService.getInstance().getProductbyId(id);
-
+            
             if (rs != null) {
                 result.put("product", rs);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
@@ -127,7 +131,7 @@ public class ProductController extends ApiServlet {
             logger.error(ex.getMessage(), ex);
         }
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
-
+        
     }
-
+    
 }
