@@ -11,6 +11,7 @@ import app.guest.controller.LoginController;
 import app.guest.service.LoginService;
 import app.config.ConfigApp;
 import core.utilities.CommonUtil;
+import java.security.MessageDigest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -59,12 +60,14 @@ public class AccountController extends AbstractAdminController {
             }
 
             byte[] password = req.getParameter("password").getBytes();
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] encrypt = md5.digest(password);
 
             String name = req.getParameter("name");
             String role = req.getParameter("role");
             String email = req.getParameter("email");
 
-            int resultUser = AccountService.getInstance().insertByAdmin(userName, password, name, role, email);
+            int resultUser = AccountService.getInstance().insertByAdmin(userName, encrypt, name, role, email);
             switch (resultUser) {
                 case 1:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);
