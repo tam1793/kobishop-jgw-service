@@ -70,9 +70,9 @@ public class OrderController extends AbstractEmployeeController {
 
             String orderId = req.getParameter("orderId");
             String orderStatus = req.getParameter("orderStatus");
-            boolean added = OrderService.getInstance().modifyOrder(Integer.parseInt(orderId), orderStatus);
+            boolean updated = OrderService.getInstance().modifyOrder(Integer.parseInt(orderId), orderStatus);
 
-            if (added) {
+            if (updated) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);
             } else {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);

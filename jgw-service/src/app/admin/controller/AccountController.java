@@ -10,8 +10,11 @@ import app.entity.EnApiOutput;
 import app.guest.controller.LoginController;
 import app.guest.service.LoginService;
 import app.config.ConfigApp;
+import app.entity.EnApp;
 import core.utilities.CommonUtil;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -32,6 +35,10 @@ public class AccountController extends AbstractAdminController {
             switch (pathInfo) {
                 case "/insertAdmin":
                     return insertAdmin(req, resp);
+                case "/getAccount":
+                    return getAccount();
+                case "/modifyAccountRole":
+                    return modifyAccountRole(req,resp);
                 default:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }
@@ -82,5 +89,48 @@ public class AccountController extends AbstractAdminController {
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
 
     }
+    
+    private EnApiOutput getAccount() {
+        try {
+            List<EnApp.EnAccountInfoNoPass> resultAccount = AccountService.getInstance().getAccount();
+            HashMap<String, Object> result = new HashMap<String, Object>();
+            if (resultAccount!=null && !resultAccount.isEmpty()) {
+                result.put("listAccounts", resultAccount);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
+            } else {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+
+    }
+    
+    private EnApiOutput modifyAccountRole(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            if (!checkValidParam(req, new String[]{"userId","role"})
+                    || !CommonUtil.isInteger(req.getParameter("userId"))
+                    || !CommonUtil.isValidString(req.getParameter("role"))) {
+                logger.info("modifyAccount fail: " + req);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+
+            String userId = req.getParameter("userId");
+            String role = req.getParameter("role");
+            boolean updated = AccountService.getInstance().modifyAccountRole(Integer.parseInt(userId), role);
+
+            if (updated) {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);
+            } else {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
+            }
+
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
+    }
+
 
 }

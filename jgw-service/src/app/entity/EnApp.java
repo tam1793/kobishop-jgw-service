@@ -104,6 +104,18 @@ public class EnApp {
         public String address;
         public String phone;
     }
+    
+    public static class EnAccountInfoNoPass {
+
+        public int id;
+        public String username;
+        public String name;
+        public String email;
+        public String birthday;
+        public String address;
+        public String phone;
+        public String role;
+    }
 
     public static class EnBrand {
 
