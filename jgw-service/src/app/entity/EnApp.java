@@ -116,7 +116,7 @@ public class EnApp {
         public String phone;
         public String role;
     }
-
+    
     public static class EnBrand {
 
         public int id;

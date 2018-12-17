@@ -62,4 +62,30 @@ public class AccountService {
         }
         return null;
     }
+    
+    public int modifyInfo(int userId,String name,String email,String birthday,String address,String phone) {
+        Connection conn = null;
+        try {
+            conn = dbConnector.getMySqlConnection();
+            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            int result = create.update(Tables.ACCOUNT)
+                                .set(Tables.ACCOUNT.NAME,name)
+                                .set(Tables.ACCOUNT.EMAIL,email)
+                                .set(Tables.ACCOUNT.BIRTHDAY,birthday)
+                                .set(Tables.ACCOUNT.ADDRESS,address)
+                                .set(Tables.ACCOUNT.PHONE,phone)
+                                .where(Tables.ACCOUNT.ID.eq(userId))
+                                .execute();
+            if (result > 0) {
+                logger.info("modify account info success with UserId: " + Integer.toString(userId));
+                return 1;
+            }
+            logger.info("modify account info fail with UserId: " + Integer.toString(userId) );
+            return 0;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        logger.error("Database Error");
+        return -1;
+    }
 }

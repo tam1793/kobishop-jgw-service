@@ -7,7 +7,6 @@ package app.admin.controller;
 
 import app.admin.service.AccountService;
 import app.entity.EnApiOutput;
-import app.guest.controller.LoginController;
 import app.guest.service.LoginService;
 import app.config.ConfigApp;
 import app.entity.EnApp;
@@ -25,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class AccountController extends AbstractAdminController {
 
-    private final Logger logger = Logger.getLogger(LoginController.class);
+    private final Logger logger = Logger.getLogger(AccountController.class);
 
     @Override
     protected EnApiOutput doProcess(HttpServletRequest req, HttpServletResponse resp) {
