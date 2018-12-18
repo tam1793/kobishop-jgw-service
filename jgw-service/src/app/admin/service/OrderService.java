@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.user.service;
+package app.admin.service;
 
 import app.config.ConfigApp;
-import app.entity.EnApp.*;
+import app.entity.EnApp;
 import core.utilities.DBConnector;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -54,42 +56,26 @@ public class OrderService {
         return instance;
     }
     
-    public HashMap<String,Object> getOrders(int userId,int page,int ordersPerPage) {
+    public HashMap<String, Object> getOrdersByRange(int page,int ordersPerPage,String from,String to) {
         Connection conn = null;
         try {
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = formatter.parse(from);
+            Timestamp tsFrom = new Timestamp(date.getTime());
+            date = formatter.parse(to);
+            Timestamp tsTo = new Timestamp(date.getTime());
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
             HashMap<String, Object> map = new HashMap<String, Object>();
-            List<EnOrder> list = create.fetch(Tables.ORDER, Tables.ORDER.USERID.eq(userId)).into(EnOrder.class);
+            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).where(Tables.ORDER.CREATEDATE.between(tsFrom, tsTo)).fetchInto(EnApp.EnOrder.class);
             int sizeList = list.size();
-            List<EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
+            List<EnApp.EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
             map.put("numberOfPage", sizeList % ordersPerPage != 0 ? sizeList / ordersPerPage + 1 : sizeList / ordersPerPage);
-            map.put("listOrders", sub);
+            map.put("listOrdersByRange", sub);
             return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
         return null;
-    }
-    
-    public boolean addOrder(int userId, String items) {
-        Connection conn = null;
-        try {
-            conn = dbConnector.getMySqlConnection();
-            Date now = new Date();
-            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            int result = create.insertInto(Tables.ORDER, Tables.ORDER.CREATEDATE,Tables.ORDER.PRODUCTS,Tables.ORDER.STATE,Tables.ORDER.USERID)
-                               .values(new Timestamp(now.getTime()),items,"Chưa giao",userId).execute();
-            if (result > 0) {
-                logger.info("add order success with UserId: " + Integer.toString(userId) + "Items: " + items );
-                return true;
-            }
-            logger.info("add order fail with UserId: " + Integer.toString(userId) + "Items: " + items );
-            return false;
-        } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
-        }
-        logger.error("Database Error");
-        return false;
     }
 }

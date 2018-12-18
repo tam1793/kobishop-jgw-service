@@ -5,8 +5,6 @@
  */
 package main;
 
-import app.admin.controller.AccountController;
-import app.guest.controller.LoginController;
 import app.config.ConfigApp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,7 +47,7 @@ public class JavaServer {
         context.setHandler(sessions);
 
         //Servlet for Guest
-        context.addServlet(LoginController.class, "/auth/*");
+        context.addServlet(app.guest.controller.LoginController.class, "/auth/*");
         context.addServlet(app.guest.controller.ProductController.class, "/products/*");
         context.addServlet(app.guest.controller.BrandController.class, "/brands/*");
         context.addServlet(app.guest.controller.TypeController.class, "/types/*");
@@ -63,7 +61,9 @@ public class JavaServer {
         context.addServlet(app.employee.controller.OrderController.class, "/employee/order/*");
         
         //Servlet for Admin
-        context.addServlet(AccountController.class, "/admin/account/*");
+        context.addServlet(app.admin.controller.AccountController.class, "/admin/account/*");
+        context.addServlet(app.admin.controller.ProductController.class, "/admin/product/*");
+        context.addServlet(app.admin.controller.OrderController.class, "/admin/order/*");
 
         server.setHandler(context);
         try {
