@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app.employee.service;
+package app.admin.service;
 
 import app.config.ConfigApp;
 import app.entity.EnApp;
 import core.utilities.DBConnector;
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -52,43 +56,26 @@ public class OrderService {
         return instance;
     }
     
-    public HashMap<String, Object> getOrders(int page,int ordersPerPage) {
+    public HashMap<String, Object> getOrdersByRange(int page,int ordersPerPage,String from,String to) {
         Connection conn = null;
         try {
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = formatter.parse(from);
+            Timestamp tsFrom = new Timestamp(date.getTime());
+            date = formatter.parse(to);
+            Timestamp tsTo = new Timestamp(date.getTime());
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
             HashMap<String, Object> map = new HashMap<String, Object>();
-            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).orderBy(Tables.ORDER.CREATEDATE.desc()).fetchInto(EnApp.EnOrder.class);
+            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).where(Tables.ORDER.CREATEDATE.between(tsFrom, tsTo)).fetchInto(EnApp.EnOrder.class);
             int sizeList = list.size();
             List<EnApp.EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
             map.put("numberOfPage", sizeList % ordersPerPage != 0 ? sizeList / ordersPerPage + 1 : sizeList / ordersPerPage);
-            map.put("listOrders", sub);
+            map.put("listOrdersByRange", sub);
             return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
         return null;
-    }
-    
-    public boolean modifyOrder(int orderId, String orderStatus) {
-        Connection conn = null;
-        try {
-            conn = dbConnector.getMySqlConnection();
-            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            int result = create.update(Tables.ORDER)
-                                .set(Tables.ORDER.STATE,orderStatus)
-                                .where(Tables.ORDER.ID.eq(orderId))
-                                .execute();
-            if (result > 0) {
-                logger.info("modify order success with OrderId: " + Integer.toString(orderId) + "OrderStatus: " + orderStatus );
-                return true;
-            }
-            logger.info("modify order fail with OrderId: " + Integer.toString(orderId) + "OrderStatus: " + orderStatus );
-            return false;
-        } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
-        }
-        logger.error("Database Error");
-        return false;
     }
 }

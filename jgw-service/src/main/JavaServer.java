@@ -63,6 +63,7 @@ public class JavaServer {
         //Servlet for Admin
         context.addServlet(app.admin.controller.AccountController.class, "/admin/account/*");
         context.addServlet(app.admin.controller.ProductController.class, "/admin/product/*");
+        context.addServlet(app.admin.controller.OrderController.class, "/admin/order/*");
 
         server.setHandler(context);
         try {
