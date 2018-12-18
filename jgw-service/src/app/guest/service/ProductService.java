@@ -99,12 +99,13 @@ public class ProductService {
             HashMap<String, Object> map = new HashMap<String, Object>();
             List<EnProduct> list = create.selectFrom(PRODUCT).where(condition).fetch().into(EnProduct.class);
             int sizeList = list.size();
+            if (page > sizeList) {
+                return null;
+            }
             List<EnProduct> sub = list.subList((page - 1) * productsPerPage, page * productsPerPage <= sizeList ? page * productsPerPage : sizeList);
             map.put("numberOfPage", sizeList % productsPerPage != 0 ? sizeList / productsPerPage + 1 : sizeList / productsPerPage);
             map.put("listProducts", sub);
             return map;
-
-//            return create.select().from(PRODUCT).where(condition).limit(productsPerPage).offset(page * productsPerPage).fetch().into(EnProduct.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
