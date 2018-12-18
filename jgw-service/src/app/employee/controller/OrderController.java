@@ -30,7 +30,7 @@ public class OrderController extends AbstractEmployeeController {
 
             switch (pathInfo) {
                 case "/getOrders":
-                    return getOrders();
+                    return getOrders(req);
                 case "/modifyOrder":
                     return modifyOrder(req, resp);
                 default:
@@ -42,15 +42,27 @@ public class OrderController extends AbstractEmployeeController {
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
 
-    private EnApiOutput getOrders() {
+    private EnApiOutput getOrders(HttpServletRequest req) {
         try {
-            List<EnApp.EnOrder> resultOrders = OrderService.getInstance().getOrders();
-            HashMap<String, Object> result = new HashMap<String, Object>();
-            if (resultOrders!=null && !resultOrders.isEmpty()) {
-                result.put("listOrders", resultOrders);
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
+            if (!CommonUtil.checkValidParam(req, new String[]{"page", "ordersPerPage"})
+                    || !CommonUtil.isInteger(req.getParameter("page"))
+                    || !CommonUtil.isInteger(req.getParameter("ordersPerPage"))) {
+                logger.error("getOrders - params invalid - page: " + req.getParameter("page") + " - ordersPerPage: " + req.getParameter("ordersPerPage"));
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            int page = Integer.parseInt(req.getParameter("page"));
+            int ordersPerPage = Integer.parseInt(req.getParameter("ordersPerPage"));
+            if (page < 1 || ordersPerPage < 1) {
+                logger.error("check param page & ordersPerPage invalid - page: " + page + " - ordersPerPage: " + ordersPerPage);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            
+            HashMap<String, Object> resultOrder = OrderService.getInstance().getOrders(page,ordersPerPage);
+            
+            if (resultOrder!=null) {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultOrder);
             } else {
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.ORDER_NOT_FOUND);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

@@ -34,8 +34,8 @@ public class AccountController extends AbstractAdminController {
             switch (pathInfo) {
                 case "/insertAdmin":
                     return insertAdmin(req, resp);
-                case "/getAccount":
-                    return getAccount();
+                case "/getAccounts":
+                    return getAccounts(req);
                 case "/modifyAccountRole":
                     return modifyAccountRole(req,resp);
                 default:
@@ -89,13 +89,26 @@ public class AccountController extends AbstractAdminController {
 
     }
     
-    private EnApiOutput getAccount() {
+    private EnApiOutput getAccounts(HttpServletRequest req) {
         try {
-            List<EnApp.EnAccountInfoNoPass> resultAccount = AccountService.getInstance().getAccount();
-            HashMap<String, Object> result = new HashMap<String, Object>();
-            if (resultAccount!=null && !resultAccount.isEmpty()) {
-                result.put("listAccounts", resultAccount);
-                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
+            if (!CommonUtil.checkValidParam(req, new String[]{"page", "accountsPerPage"})
+                    || !CommonUtil.isInteger(req.getParameter("page"))
+                    || !CommonUtil.isInteger(req.getParameter("accountsPerPage"))) {
+                logger.error("getAccount - params invalid - page: " + req.getParameter("page") + " - accountsPerPage: " + req.getParameter("accountsPerPage"));
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            
+            int page = Integer.parseInt(req.getParameter("page"));
+            int accountsPerPage = Integer.parseInt(req.getParameter("accountsPerPage"));
+            if (page < 1 || accountsPerPage < 1) {
+                logger.error("check param page & accountsPerPage invalid - page: " + page + " - accountsPerPage: " + accountsPerPage);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
+            }
+            
+            HashMap<String, Object> resultAccount = AccountService.getInstance().getAccount(page,accountsPerPage);
+            
+            if (resultAccount!=null) {
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultAccount);
             } else {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.UNSUPPORTED_ERROR);
             }

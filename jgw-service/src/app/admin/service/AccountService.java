@@ -9,6 +9,7 @@ import app.config.ConfigApp;
 import app.entity.EnApp;
 import core.utilities.DBConnector;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -81,12 +82,18 @@ public class AccountService {
         return -1;
     }
     
-    public List<EnApp.EnAccountInfoNoPass> getAccount() {
+    public HashMap<String, Object> getAccount(int page, int accountsPerPage) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            return create.selectFrom(Tables.ACCOUNT).fetchInto(EnApp.EnAccountInfoNoPass.class);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            List<EnApp.EnAccountInfoNoPass> list = create.selectFrom(Tables.ACCOUNT).fetchInto(EnApp.EnAccountInfoNoPass.class);
+            int sizeList = list.size();
+            List<EnApp.EnAccountInfoNoPass> sub = list.subList((page - 1) * accountsPerPage, page * accountsPerPage <= sizeList ? page * accountsPerPage : sizeList);
+            map.put("numberOfPage", sizeList % accountsPerPage != 0 ? sizeList / accountsPerPage + 1 : sizeList / accountsPerPage);
+            map.put("listAccounts", sub);
+            return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }

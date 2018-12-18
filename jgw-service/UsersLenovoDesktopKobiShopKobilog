@@ -1,61 +1,30 @@
-2018-12-17 10:49:27  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 10:49:27  INFO DBConnector:78 - user: root
-2018-12-17 10:49:27  INFO DBConnector:79 - pass: admin
-2018-12-17 10:49:27  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 10:49:33  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDE3MSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.BPCa3jY5EtmAEyRrstqxwrz3Kl4QbbtGg4jzHPaaRjm4I6MGufvWPA2zaUbzCuqRDcc-yhKRtf4AkJ2tjTw_2g\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545018573568}
-2018-12-17 10:49:47  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDE3MSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.BPCa3jY5EtmAEyRrstqxwrz3Kl4QbbtGg4jzHPaaRjm4I6MGufvWPA2zaUbzCuqRDcc-yhKRtf4AkJ2tjTw_2g","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\",\"role\":\"user\"},{\"username\":\"thang\",\"name\":\"vthang\",\"email\":\"vthaaang@gmail.com\",\"role\":\"employee\"}]}}","ts":1545018587686}
-2018-12-17 10:50:17  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":-1,\"returnMessage\":\"INVALID_INPUT\",\"data\":{}}","ts":1545018617841}
-2018-12-17 10:50:27  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":-1,\"returnMessage\":\"INVALID_INPUT\",\"data\":{}}","ts":1545018627001}
-2018-12-17 10:52:30  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 10:52:30  INFO DBConnector:78 - user: root
-2018-12-17 10:52:30  INFO DBConnector:79 - pass: admin
-2018-12-17 10:52:30  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 10:52:33  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDM1MiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.3_mKue6GJeRbbc8dD89TvPAer5uNQIcBNBa1e82OAqvcec8lZaCuZtCKT26tIkmrG9S66nFahp13BMO7jV9kMg\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545018753703}
-2018-12-17 10:52:46  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDM1MiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.3_mKue6GJeRbbc8dD89TvPAer5uNQIcBNBa1e82OAqvcec8lZaCuZtCKT26tIkmrG9S66nFahp13BMO7jV9kMg","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"id\":2,\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":3,\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":7,\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\",\"role\":\"user\"},{\"id\":8,\"username\":\"thang\",\"name\":\"vthang\",\"email\":\"vthaaang@gmail.com\",\"role\":\"employee\"}]}}","ts":1545018766957}
-2018-12-17 10:58:04  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 10:58:04  INFO DBConnector:78 - user: root
-2018-12-17 10:58:04  INFO DBConnector:79 - pass: admin
-2018-12-17 10:58:04  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 10:58:05  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545019085702}
-2018-12-17 10:58:33  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"id\":2,\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":3,\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":7,\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\",\"role\":\"user\"},{\"id\":8,\"username\":\"thang\",\"name\":\"vthang\",\"email\":\"vthaaang@gmail.com\",\"role\":\"employee\"}]}}","ts":1545019113911}
-2018-12-17 10:59:07  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?userId=8&role=user&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/modify","Body":""},"response":"{\"returnCode\":-2,\"returnMessage\":\"UNSUPPORTED_ERROR\",\"data\":{}}","ts":1545019147580}
-2018-12-17 11:02:22  INFO AccountService:106 - modify account role success with UserId: 8Role: user
-2018-12-17 11:02:22  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?userId=8&role=user&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/modifyAccountRole","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{}}","ts":1545019342347}
-2018-12-17 11:02:28  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"id\":2,\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":3,\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":7,\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\",\"role\":\"user\"},{\"id\":8,\"username\":\"thang\",\"name\":\"vthang\",\"email\":\"vthaaang@gmail.com\",\"role\":\"user\"}]}}","ts":1545019348298}
-2018-12-17 11:02:37  INFO AccountService:106 - modify account role success with UserId: 8Role: employee
-2018-12-17 11:02:37  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?userId=8&role=employee&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/modifyAccountRole","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{}}","ts":1545019357847}
-2018-12-17 11:02:42  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA0MDY4NSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.12aCIIT7EtB_BVMadyR4-93TZV8IHi4i4pcUUtOvUHzS9Q1oNIhlcQWgqBskRy2OfucItucbcMauzqO7Qtkfxw","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"id\":2,\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":3,\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":7,\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\",\"role\":\"user\"},{\"id\":8,\"username\":\"thang\",\"name\":\"vthang\",\"email\":\"vthaaang@gmail.com\",\"role\":\"employee\"}]}}","ts":1545019362085}
-2018-12-17 18:18:01  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 18:18:01  INFO DBConnector:78 - user: root
-2018-12-17 18:18:01  INFO DBConnector:79 - pass: admin
-2018-12-17 18:18:01  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 18:18:05  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=quan&password=quan","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA2NzA4NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.G3kYPr-8ExzJxMcQoX1EXXSni27fP2A_wpcbbb0vLEWaAT8m9hYlEiq9KeBmN9M4vrIcE9TDvcH0tjJH4yt0UA\",\"userName\":\"quan\",\"permission\":\"user\"}}}","ts":1545045485707}
-2018-12-17 18:18:49  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA2NzA4NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.G3kYPr-8ExzJxMcQoX1EXXSni27fP2A_wpcbbb0vLEWaAT8m9hYlEiq9KeBmN9M4vrIcE9TDvcH0tjJH4yt0UA","IP":"127.0.0.1","URI":"/api/user/account/getInfo","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"info\":[{\"username\":\"quan\",\"name\":\"mquan\",\"email\":\"mquaaan@gmail.com\"}]}}","ts":1545045529641}
-2018-12-17 18:21:55  INFO AccountService:80 - modify account info success with UserId: 7
-2018-12-17 18:21:55  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?name=Minh%20Qu%C3%A2n&email=zxcvb@rmit.com&birthday=24/12/2001&phone=091234534&address=Qu%E1%BA%ADn%20Cam&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA2NzA4NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.G3kYPr-8ExzJxMcQoX1EXXSni27fP2A_wpcbbb0vLEWaAT8m9hYlEiq9KeBmN9M4vrIcE9TDvcH0tjJH4yt0UA","IP":"127.0.0.1","URI":"/api/user/account/modifyInfo","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{}}","ts":1545045715973}
-2018-12-17 18:22:00  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA2NzA4NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.G3kYPr-8ExzJxMcQoX1EXXSni27fP2A_wpcbbb0vLEWaAT8m9hYlEiq9KeBmN9M4vrIcE9TDvcH0tjJH4yt0UA","IP":"127.0.0.1","URI":"/api/user/account/getInfo","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"info\":[{\"username\":\"quan\",\"name\":\"Minh Quân\",\"email\":\"zxcvb@rmit.com\",\"birthday\":\"24/12/2001\",\"address\":\"Quận Cam\",\"phone\":\"091234534\"}]}}","ts":1545045720701}
-2018-12-17 20:05:17  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 20:05:17  INFO DBConnector:78 - user: root
-2018-12-17 20:05:17  INFO DBConnector:79 - pass: admin
-2018-12-17 20:05:17  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 20:05:31  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3MzUyNiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.seKDhYyj7BkEmWRrKGQUPXe5OXWe7BMpFGNj33XFa-TXSN7-VYp4xu-sCghJdTMN0b-m1SbakOlIoakQGuE_cg\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545051931639}
-2018-12-17 20:05:31  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3MzUzMSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-6kuo6Vl34EUMOzYqzdIWb9nouA8MZyaN53Alx9iq37jSGI8xbeyvSrZ8aYlJSoSqyHIK4DB6hbKXoRyK0DDNg\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545051931700}
-2018-12-17 20:08:20  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"","IP":"127.0.0.1","URI":"/api/admin/product/addProduct","Body":""},"response":"{\"returnCode\":-1,\"returnMessage\":\"INVALID_INPUT\",\"data\":{}}","ts":1545052100174}
-2018-12-17 20:11:55  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 20:11:55  INFO DBConnector:78 - user: root
-2018-12-17 20:11:55  INFO DBConnector:79 - pass: admin
-2018-12-17 20:11:55  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 20:11:56 ERROR ProductService:77 - SQL [insert into `kobishop`.`product` (`typeId`, `brandId`, `name`, `description`, `price`, `soldItems`, `leftItems`, `specs`, `isDeleted`) values (?, ?, ?, ?, ?, ?, ?, ?, ?)]; Cannot add or update a child row: a foreign key constraint fails (`kobishop`.`product`, CONSTRAINT `PRODUCT_TYPE` FOREIGN KEY (`typeId`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
-org.jooq.exception.DataAccessException: SQL [insert into `kobishop`.`product` (`typeId`, `brandId`, `name`, `description`, `price`, `soldItems`, `leftItems`, `specs`, `isDeleted`) values (?, ?, ?, ?, ?, ?, ?, ?, ?)]; Cannot add or update a child row: a foreign key constraint fails (`kobishop`.`product`, CONSTRAINT `PRODUCT_TYPE` FOREIGN KEY (`typeId`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
-	at org.jooq_3.9.3.MYSQL.debug(Unknown Source)
-	at org.jooq.impl.Tools.translate(Tools.java:1985)
-	at org.jooq.impl.DefaultExecuteContext.sqlException(DefaultExecuteContext.java:676)
-	at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:363)
-	at org.jooq.impl.AbstractDelegatingQuery.execute(AbstractDelegatingQuery.java:135)
-	at app.admin.service.ProductService.addProduct(ProductService.java:68)
-	at app.admin.controller.ProductController.addProduct(ProductController.java:66)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:30)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
+2018-12-18 11:13:57  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
+2018-12-18 11:13:57  INFO DBConnector:78 - user: root
+2018-12-18 11:13:57  INFO DBConnector:79 - pass: admin
+2018-12-18 11:13:57  INFO DBConnector:88 - mySQLPool: finished init pool...
+2018-12-18 11:14:04  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=thang&password=thang","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODA0MSwidXNlciI6eyJ1c2VySWQiOjgsInVzZXJOYW1lIjoidGhhbmciLCJwZXJtaXNzaW9uIjoiZW1wbG95ZWUifX0.f0vDovxFW8kSQZifKQGw7HV_9jJAjVj8dKRPYzK58V50WRa9CbffsdcPYRJaFdfVfEaOdjVxIBgz3sDyfAD4SQ\",\"userName\":\"thang\",\"permission\":\"employee\"}}}","ts":1545106444705}
+2018-12-18 11:14:39  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&ordersPerPage=2","IP":"127.0.0.1","URI":"/api/employee/order/getOrders","Body":""},"response":"{\"returnCode\":-1,\"returnMessage\":\"INVALID_INPUT\",\"data\":{}}","ts":1545106479742}
+2018-12-18 11:15:01  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&ordersPerPage=2&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODA0MSwidXNlciI6eyJ1c2VySWQiOjgsInVzZXJOYW1lIjoidGhhbmciLCJwZXJtaXNzaW9uIjoiZW1wbG95ZWUifX0.f0vDovxFW8kSQZifKQGw7HV_9jJAjVj8dKRPYzK58V50WRa9CbffsdcPYRJaFdfVfEaOdjVxIBgz3sDyfAD4SQ","IP":"127.0.0.1","URI":"/api/employee/order/getOrders","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listOrders\":[{\"createDate\":\"Dec 16, 2018\",\"id\":6,\"products\":\"Giày Vans Dép lào\",\"state\":\"Chưa giao\",\"userId\":7},{\"createDate\":\"Dec 11, 2018\",\"id\":5,\"products\":\"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq12345\",\"state\":\"Quá Tuyệt vời luôn nha\",\"userId\":7}],\"numberOfPage\":3}}","ts":1545106501204}
+2018-12-18 11:15:56  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODE1NiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-MVjZy3esmFr63FfWl-5KnPj9nmp_N2FvzSOrVvIXc8XbSVTLoshT5JhUEQvuF2W3r8ETsPLzYAQlJCdv1sX2w\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545106556618}
+2018-12-18 11:16:44  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&accountsPerPage=3&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODE1NiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-MVjZy3esmFr63FfWl-5KnPj9nmp_N2FvzSOrVvIXc8XbSVTLoshT5JhUEQvuF2W3r8ETsPLzYAQlJCdv1sX2w","IP":"127.0.0.1","URI":"/api/admin/account/getAccount","Body":""},"response":"{\"returnCode\":-2,\"returnMessage\":\"UNSUPPORTED_ERROR\",\"data\":{}}","ts":1545106604135}
+2018-12-18 11:16:52  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&accountsPerPage=3&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODE1NiwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-MVjZy3esmFr63FfWl-5KnPj9nmp_N2FvzSOrVvIXc8XbSVTLoshT5JhUEQvuF2W3r8ETsPLzYAQlJCdv1sX2w","IP":"127.0.0.1","URI":"/api/admin/account/getAccounts","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listAccounts\":[{\"id\":2,\"username\":\"nnqtam\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":3,\"username\":\"admin\",\"name\":\"NNQTam\",\"email\":\"nnqtam@gmail.com\",\"address\":\"HCM\",\"phone\":\"0903992485\",\"role\":\"admin\"},{\"id\":7,\"username\":\"quan\",\"name\":\"Minh Quân\",\"email\":\"zxcvb@rmit.com\",\"birthday\":\"24/12/2001\",\"address\":\"Quận Cam\",\"phone\":\"091234534\",\"role\":\"user\"}],\"numberOfPage\":2}}","ts":1545106612280}
+2018-12-18 11:24:17  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
+2018-12-18 11:24:17  INFO DBConnector:78 - user: root
+2018-12-18 11:24:17  INFO DBConnector:79 - pass: admin
+2018-12-18 11:24:17  INFO DBConnector:88 - mySQLPool: finished init pool...
+2018-12-18 11:24:18  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODY1OCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.ni2F6Qk6Z9MyMBsv9eLgls277P0dZnSHgWY0mRi0HbEFhXfccrQPsHW1Ag6Jb2gBGLpzM2pggfYi85phcqdQVA\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545107058558}
+2018-12-18 11:24:24  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=quan&password=quan","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODY2NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.ogBxn8WZ_oXumWYlKns9s7nzSRys7SzZb9xE8h7a4v-0fZVxdy7JBpf7KP-LzskTJhVheyHnojHWxUEWuwlvIA\",\"userName\":\"quan\",\"permission\":\"user\"}}}","ts":1545107064363}
+2018-12-18 11:25:20 ERROR OrderController:50 - getOrders - params invalid - page: 1 - ordersPerPage: null
+2018-12-18 11:25:20  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&ordersPerPage3&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODY2NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.ogBxn8WZ_oXumWYlKns9s7nzSRys7SzZb9xE8h7a4v-0fZVxdy7JBpf7KP-LzskTJhVheyHnojHWxUEWuwlvIA","IP":"127.0.0.1","URI":"/api/user/order/getOrders","Body":""},"response":"{\"returnCode\":-1,\"returnMessage\":\"INVALID_INPUT\",\"data\":{}}","ts":1545107120948}
+2018-12-18 11:27:11  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=1&ordersPerPage=3&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODY2NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.ogBxn8WZ_oXumWYlKns9s7nzSRys7SzZb9xE8h7a4v-0fZVxdy7JBpf7KP-LzskTJhVheyHnojHWxUEWuwlvIA","IP":"127.0.0.1","URI":"/api/user/order/getOrders","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"listOrders\":[{\"createDate\":\"Dec 11, 2018\",\"id\":4,\"products\":\"abcxyz12345\",\"state\":\"Chưa giao\",\"userId\":7},{\"createDate\":\"Dec 11, 2018\",\"id\":5,\"products\":\"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq12345\",\"state\":\"Quá Tuyệt vời luôn nha\",\"userId\":7},{\"createDate\":\"Dec 16, 2018\",\"id\":6,\"products\":\"Giày Vans Dép lào\",\"state\":\"Chưa giao\",\"userId\":7}],\"numberOfPage\":1}}","ts":1545107231014}
+2018-12-18 11:27:25 ERROR OrderService:70 - fromIndex(27) > toIndex(3)
+java.lang.IllegalArgumentException: fromIndex(27) > toIndex(3)
+	at java.util.ArrayList.subListRangeCheck(ArrayList.java:1014)
+	at java.util.ArrayList.subList(ArrayList.java:1004)
+	at app.user.service.OrderService.getOrders(OrderService.java:65)
+	at app.user.controller.OrderController.getOrders(OrderController.java:60)
+	at app.user.controller.OrderController.doProcess(OrderController.java:33)
+	at app.user.controller.AbstractController.execute(AbstractController.java:44)
 	at core.controller.ApiServlet.process(ApiServlet.java:108)
 	at core.controller.ApiServlet.handle(ApiServlet.java:95)
 	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
@@ -77,190 +46,4 @@ org.jooq.exception.DataAccessException: SQL [insert into `kobishop`.`product` (`
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot add or update a child row: a foreign key constraint fails (`kobishop`.`product`, CONSTRAINT `PRODUCT_TYPE` FOREIGN KEY (`typeId`) REFERENCES `type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:408)
-	at com.mysql.jdbc.Util.getInstance(Util.java:383)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1049)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4226)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4158)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2615)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2776)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2840)
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2082)
-	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1302)
-	at snaq.db.CachedPreparedStatement.execute(CachedPreparedStatement.java:328)
-	at org.jooq.tools.jdbc.DefaultPreparedStatement.execute(DefaultPreparedStatement.java:195)
-	at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:431)
-	at org.jooq.impl.AbstractDMLQuery.execute(AbstractDMLQuery.java:335)
-	at org.jooq.impl.AbstractQuery.execute(AbstractQuery.java:349)
-	... 26 more
-2018-12-17 20:11:56 ERROR ProductService:79 - Database Error
-2018-12-17 20:11:56  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?typeId=1&brandId=2&name=M%C3%A1y%20si%C3%AAu%20m%E1%BA%A1nh&description=M%C3%BAa%20Dasua%20kh%C3%B4ng%20b%E1%BB%8B%20lag&price=10000000&soldItems=1&leftItems=100&specs=K%20c%C3%B3%20g%C3%AC&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3MzUzMSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-6kuo6Vl34EUMOzYqzdIWb9nouA8MZyaN53Alx9iq37jSGI8xbeyvSrZ8aYlJSoSqyHIK4DB6hbKXoRyK0DDNg","IP":"127.0.0.1","URI":"/api/admin/product/addProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545052316934}
-2018-12-17 20:15:08  INFO ProductService:70 - add product success
-2018-12-17 20:15:08  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?typeId=41&brandId=31&name=M%C3%A1y%20si%C3%AAu%20m%E1%BA%A1nh&description=M%C3%BAa%20Dasua%20kh%C3%B4ng%20b%E1%BB%8B%20lag&price=10000000&soldItems=1&leftItems=100&specs=K%20c%C3%B3%20g%C3%AC&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3MzUzMSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-6kuo6Vl34EUMOzYqzdIWb9nouA8MZyaN53Alx9iq37jSGI8xbeyvSrZ8aYlJSoSqyHIK4DB6hbKXoRyK0DDNg","IP":"127.0.0.1","URI":"/api/admin/product/addProduct","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{}}","ts":1545052508997}
-2018-12-17 20:18:05 ERROR ProductController:119 - null
-java.lang.NumberFormatException: null
-	at java.lang.Integer.parseInt(Integer.java:542)
-	at java.lang.Integer.parseInt(Integer.java:615)
-	at app.admin.controller.ProductController.modifyProduct(ProductController.java:109)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:32)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
-	at core.controller.ApiServlet.process(ApiServlet.java:108)
-	at core.controller.ApiServlet.handle(ApiServlet.java:95)
-	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:738)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:551)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:219)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1111)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:478)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1045)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:462)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:279)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:232)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:534)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
-	at java.lang.Thread.run(Thread.java:748)
-2018-12-17 20:18:05  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=0&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3MzUzMSwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.-6kuo6Vl34EUMOzYqzdIWb9nouA8MZyaN53Alx9iq37jSGI8xbeyvSrZ8aYlJSoSqyHIK4DB6hbKXoRyK0DDNg","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545052685941}
-2018-12-17 20:19:59  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 20:19:59  INFO DBConnector:78 - user: root
-2018-12-17 20:19:59  INFO DBConnector:79 - pass: admin
-2018-12-17 20:19:59  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 20:20:01  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDQwMCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.vRpCieLTnGAebN-Iqx5myE0W0SEM-Bcrr-MQx_cugG_WPkr2DdANfxeennohh5X5WO1hje3JrrdhiKvKbIkroQ\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545052801101}
-2018-12-17 20:20:11 ERROR ProductController:119 - null
-java.lang.NumberFormatException: null
-	at java.lang.Integer.parseInt(Integer.java:542)
-	at java.lang.Integer.parseInt(Integer.java:615)
-	at app.admin.controller.ProductController.modifyProduct(ProductController.java:109)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:32)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
-	at core.controller.ApiServlet.process(ApiServlet.java:108)
-	at core.controller.ApiServlet.handle(ApiServlet.java:95)
-	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:738)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:551)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:219)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1111)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:478)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1045)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:462)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:279)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:232)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:534)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
-	at java.lang.Thread.run(Thread.java:748)
-2018-12-17 20:20:11  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=0&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDQwMCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.vRpCieLTnGAebN-Iqx5myE0W0SEM-Bcrr-MQx_cugG_WPkr2DdANfxeennohh5X5WO1hje3JrrdhiKvKbIkroQ","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545052811953}
-2018-12-17 20:22:10 ERROR ProductController:119 - null
-java.lang.NumberFormatException: null
-	at java.lang.Integer.parseInt(Integer.java:542)
-	at java.lang.Integer.parseInt(Integer.java:615)
-	at app.admin.controller.ProductController.modifyProduct(ProductController.java:109)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:32)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
-	at core.controller.ApiServlet.process(ApiServlet.java:108)
-	at core.controller.ApiServlet.handle(ApiServlet.java:95)
-	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:738)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:551)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:219)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1111)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:478)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1045)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:462)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:279)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:232)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:534)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
-	at java.lang.Thread.run(Thread.java:748)
-2018-12-17 20:22:10  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=0&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDQwMCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.vRpCieLTnGAebN-Iqx5myE0W0SEM-Bcrr-MQx_cugG_WPkr2DdANfxeennohh5X5WO1hje3JrrdhiKvKbIkroQ","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545052930732}
-2018-12-17 20:23:15 ERROR ProductController:119 - null
-java.lang.NumberFormatException: null
-	at java.lang.Integer.parseInt(Integer.java:542)
-	at java.lang.Integer.parseInt(Integer.java:615)
-	at app.admin.controller.ProductController.modifyProduct(ProductController.java:109)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:32)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
-	at core.controller.ApiServlet.process(ApiServlet.java:108)
-	at core.controller.ApiServlet.handle(ApiServlet.java:95)
-	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:738)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:551)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:219)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1111)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:478)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1045)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:462)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:279)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:232)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:534)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
-	at java.lang.Thread.run(Thread.java:748)
-2018-12-17 20:23:15  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=1&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDQwMCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.vRpCieLTnGAebN-Iqx5myE0W0SEM-Bcrr-MQx_cugG_WPkr2DdANfxeennohh5X5WO1hje3JrrdhiKvKbIkroQ","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545052995534}
-2018-12-17 20:26:37  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 20:26:37  INFO DBConnector:78 - user: root
-2018-12-17 20:26:37  INFO DBConnector:79 - pass: admin
-2018-12-17 20:26:37  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 20:26:39  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDc5OCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.CzuBBKQtEyZ3qhdF8j7DBgqcUOKI6xtTD5zmZ5OGVyuFlIcsAuEzh9SZ4XWeJMapmc44hx23NUqMcLsNMl6Ocw\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545053199255}
-2018-12-17 20:27:02 ERROR ProductController:119 - null
-java.lang.NumberFormatException: null
-	at java.lang.Integer.parseInt(Integer.java:542)
-	at java.lang.Integer.parseInt(Integer.java:615)
-	at app.admin.controller.ProductController.modifyProduct(ProductController.java:98)
-	at app.admin.controller.ProductController.doProcess(ProductController.java:32)
-	at app.admin.controller.AbstractAdminController.execute(AbstractAdminController.java:45)
-	at core.controller.ApiServlet.process(ApiServlet.java:108)
-	at core.controller.ApiServlet.handle(ApiServlet.java:95)
-	at core.controller.ApiServlet.doGet(ApiServlet.java:86)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:687)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:738)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:551)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:219)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1111)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:478)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:183)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1045)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
-	at org.eclipse.jetty.server.Server.handle(Server.java:462)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:279)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:232)
-	at org.eclipse.jetty.io.AbstractConnection$2.run(AbstractConnection.java:534)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:607)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:536)
-	at java.lang.Thread.run(Thread.java:748)
-2018-12-17 20:27:02  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=1&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDc5OCwidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.CzuBBKQtEyZ3qhdF8j7DBgqcUOKI6xtTD5zmZ5OGVyuFlIcsAuEzh9SZ4XWeJMapmc44hx23NUqMcLsNMl6Ocw","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":-1000,\"returnMessage\":\"SYSTEM_ERROR\",\"data\":{}}","ts":1545053222854}
-2018-12-17 20:27:37  INFO DBConnector:77 - Mysql jdbc: jdbc:mysql://127.0.0.1:3306/kobishop?useUnicode=true&characterEncoding=utf-8
-2018-12-17 20:27:37  INFO DBConnector:78 - user: root
-2018-12-17 20:27:37  INFO DBConnector:79 - pass: admin
-2018-12-17 20:27:37  INFO DBConnector:88 - mySQLPool: finished init pool...
-2018-12-17 20:27:38  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?username=admin&password=admin","IP":"127.0.0.1","URI":"/api/auth/login","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{\"session\":{\"token\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDg1NywidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.GhaPbPryPxw6Im9Tl6QBF8cDIgI7LEDCe0dPIdu26wdrd3twEM2Sp8YTQ54pfIjRXJ1EsuMFgjo_YmVPRKDwBA\",\"userName\":\"admin\",\"permission\":\"admin\"}}}","ts":1545053258379}
-2018-12-17 20:28:03  INFO ProductService:102 - modify product success with Product Id: 1
-2018-12-17 20:28:03  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?productId=1&typeId=61&brandId=1&name=M%C3%A1y%20nh%C6%B0%20shit&description=M%C3%BAa%20dasua%20l%C3%A0%20n%C3%A1t&price=1&soldItems=333&leftItems=999&specs=VN%20v%C3%B4%20%C4%91%E1%BB%8Bch&isDeleted=1&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTA3NDg1NywidXNlciI6eyJ1c2VySWQiOjMsInVzZXJOYW1lIjoiYWRtaW4iLCJwZXJtaXNzaW9uIjoiYWRtaW4ifX0.GhaPbPryPxw6Im9Tl6QBF8cDIgI7LEDCe0dPIdu26wdrd3twEM2Sp8YTQ54pfIjRXJ1EsuMFgjo_YmVPRKDwBA","IP":"127.0.0.1","URI":"/api/admin/product/modifyProduct","Body":""},"response":"{\"returnCode\":1,\"returnMessage\":\"SUCCESS\",\"data\":{}}","ts":1545053283877}
+2018-12-18 11:27:25  INFO BaseServlet:85 - logRequestWithResponse: {"request":{"Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36","Query":"?page=10&ordersPerPage=3&token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLb2Jpc2hvcCIsImV4cCI6MTU0NTEyODY2NCwidXNlciI6eyJ1c2VySWQiOjcsInVzZXJOYW1lIjoicXVhbiIsInBlcm1pc3Npb24iOiJ1c2VyIn19.ogBxn8WZ_oXumWYlKns9s7nzSRys7SzZb9xE8h7a4v-0fZVxdy7JBpf7KP-LzskTJhVheyHnojHWxUEWuwlvIA","IP":"127.0.0.1","URI":"/api/user/order/getOrders","Body":""},"response":"{\"returnCode\":-104,\"returnMessage\":\"ORDER_NOT_FOUND\",\"data\":{}}","ts":1545107245600}

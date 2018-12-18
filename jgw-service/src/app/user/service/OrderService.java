@@ -11,6 +11,7 @@ import core.utilities.DBConnector;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -53,12 +54,18 @@ public class OrderService {
         return instance;
     }
     
-    public List<EnOrder> getOrders(int userId) {
+    public HashMap<String,Object> getOrders(int userId,int page,int ordersPerPage) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
-            return create.fetch(Tables.ORDER, Tables.ORDER.USERID.eq(userId)).into(EnOrder.class);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            List<EnOrder> list = create.fetch(Tables.ORDER, Tables.ORDER.USERID.eq(userId)).into(EnOrder.class);
+            int sizeList = list.size();
+            List<EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
+            map.put("numberOfPage", sizeList % ordersPerPage != 0 ? sizeList / ordersPerPage + 1 : sizeList / ordersPerPage);
+            map.put("listOrders", sub);
+            return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
