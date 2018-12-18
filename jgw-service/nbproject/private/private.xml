@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/Desktop/KobiShop/Kobi/kobishop-jgw-service/jgw-service/src/app/admin/controller/OrderController.java</file>
-            <file>file:/C:/Users/Lenovo/Desktop/KobiShop/Kobi/kobishop-jgw-service/jgw-service/src/app/employee/service/OrderService.java</file>
-            <file>file:/C:/Users/Lenovo/Desktop/KobiShop/Kobi/kobishop-jgw-service/jgw-service/src/main/JavaServer.java</file>
-            <file>file:/C:/Users/Lenovo/Desktop/KobiShop/Kobi/kobishop-jgw-service/jgw-service/src/app/admin/service/OrderService.java</file>
+            <file>file:/home/tamnnq/Desktop/MHH/kobishop-jgw-service/jgw-service/src/app/user/controller/AccountController.java</file>
+            <file>file:/home/tamnnq/Desktop/MHH/kobishop-jgw-service/jgw-service/src/main/JavaServer.java</file>
         </group>
     </open-files>
 </project-private>

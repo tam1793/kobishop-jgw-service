@@ -76,7 +76,7 @@ public class LoginService {
             HashMap<String, Object> result = new HashMap<String, Object>();
 
             String token = createToken(new EnUserPermission(user.getId(), user.getUsername(), user.getRole()));
-            EnUserSession rs = new EnUserSession(token, user.getUsername(), user.getRole());
+            EnUserSession rs = new EnUserSession(token, user.getUsername(), user.getName(), user.getRole());
             result.put("session", rs);
             return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, result);
 

@@ -20,11 +20,13 @@ public class EnApp {
 
         public String token;
         public String userName;
+        public String name;
         public String permission;
 
-        public EnUserSession(String token, String userName, String permission) {
+        public EnUserSession(String token, String userName, String name, String permission) {
             this.token = token;
             this.userName = userName;
+            this.name = name;
             this.permission = permission;
         }
     }
@@ -104,7 +106,7 @@ public class EnApp {
         public String address;
         public String phone;
     }
-    
+
     public static class EnAccountInfoNoPass {
 
         public int id;
@@ -116,7 +118,7 @@ public class EnApp {
         public String phone;
         public String role;
     }
-    
+
     public static class EnBrand {
 
         public int id;
