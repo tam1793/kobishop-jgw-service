@@ -6,11 +6,17 @@
 package app.user.service;
 
 import app.config.ConfigApp;
-import app.entity.EnApp.*;
+import app.entity.EnApp;
+import app.entity.EnApp.EnItem;
+import app.entity.EnApp.EnOrder;
+import app.entity.EnApp.EnQuantity;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import core.utilities.DBConnector;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
@@ -76,6 +82,18 @@ public class OrderService {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
+            ObjectMapper mapper = new ObjectMapper();
+            List<EnItem> list = mapper.readValue(items, new TypeReference<ArrayList<EnItem>>() {});
+            DSLContext dslContext = DSL.using(conn, SQLDialect.MARIADB);
+            int left;
+            for(EnItem item : list){
+                List<EnQuantity> leftItem = dslContext.fetch(Tables.PRODUCT, Tables.PRODUCT.ID.eq(item.productId)).into(EnQuantity.class);
+                left = leftItem.get(0).leftItems - item.quantity;
+                dslContext.update(Tables.PRODUCT)
+                        .set(Tables.PRODUCT.LEFTITEMS,left)
+                        .where(Tables.PRODUCT.ID.eq(item.productId))
+                        .execute();
+            }
             Date now = new Date();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
             int result = create.insertInto(Tables.ORDER, Tables.ORDER.CREATEDATE,Tables.ORDER.PRODUCTS,Tables.ORDER.STATE,Tables.ORDER.USERID)
@@ -91,5 +109,27 @@ public class OrderService {
         }
         logger.error("Database Error");
         return false;
+    }
+    
+    public List<Integer> checkOrder(String items) {
+        Connection conn = null;
+        List<Integer> listFail = new ArrayList<Integer>();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<EnItem> list = mapper.readValue(items, new TypeReference<ArrayList<EnItem>>() {});
+            conn = dbConnector.getMySqlConnection();
+            DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            for(EnItem item : list){
+                List<EnQuantity> leftItem = create.fetch(Tables.PRODUCT, Tables.PRODUCT.ID.eq(item.productId)).into(EnQuantity.class);
+                if(item.quantity > leftItem.get(0).leftItems){
+                    listFail.add(item.productId);
+                }
+            }
+           return listFail;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        }
+        logger.error("Database Error");
+        return listFail;
     }
 }

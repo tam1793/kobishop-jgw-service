@@ -9,6 +9,7 @@ import app.entity.EnApiOutput;
 import app.entity.EnApp;
 import app.user.service.OrderService;
 import core.utilities.CommonUtil;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +80,15 @@ public class OrderController extends AbstractController {
             }
 
             String items = req.getParameter("items");
+            List<Integer> list = new ArrayList<Integer>();
+            list= OrderService.getInstance().checkOrder(items);
+            if(!list.isEmpty()){
+                logger.info("addOrder fail: " + req);
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("listInvalidProducts", list);
+                return new EnApiOutput(EnApiOutput.ERROR_CODE_API.PRODUCT_OVER_QUANTITY,map);
+            }
+            
             boolean added = OrderService.getInstance().addOrder(userId, items);
 
             if (added) {

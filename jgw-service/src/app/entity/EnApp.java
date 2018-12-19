@@ -131,6 +131,18 @@ public class EnApp {
         public String name;
     }
 
+    public static class EnItem {
+
+        public int productId;
+        public int quantity;
+        public int price;
+    }
+    
+    public static class EnQuantity {
+        public int leftItems;
+    }
+
+    
     public static enum EnPriceOption {
 
         OPTION_1(0, 10000000),
