@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +72,20 @@ public class OrderService {
             }
             if (CommonUtil.isValidString(from) && CommonUtil.isValidString(to) ) {
                 Date date = formatter.parse(from);
-                Timestamp tsFrom = new Timestamp(date.getTime());
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.set(Calendar.HOUR, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                Date dtmp = cal.getTime();
+                Timestamp tsFrom = new Timestamp(dtmp.getTime());
                 date = formatter.parse(to);
-                Timestamp tsTo = new Timestamp(date.getTime());
+                cal.setTime(date);
+                cal.set(Calendar.HOUR, 23);
+                cal.set(Calendar.MINUTE, 59);
+                cal.set(Calendar.SECOND, 59);
+                dtmp = cal.getTime();
+                Timestamp tsTo = new Timestamp(dtmp.getTime());
                 condition = condition.and(Tables.ORDER.CREATEDATE.between(tsFrom).and(tsTo));    
             }
             

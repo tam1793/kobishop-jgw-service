@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,13 +62,25 @@ public class OrderService {
         try {
             DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
             Date date = formatter.parse(from);
-            Timestamp tsFrom = new Timestamp(date.getTime());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.set(Calendar.HOUR, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            Date dtmp = cal.getTime();
+            Timestamp tsFrom = new Timestamp(dtmp.getTime());
             date = formatter.parse(to);
-            Timestamp tsTo = new Timestamp(date.getTime());
+            cal.setTime(date);
+            cal.set(Calendar.HOUR, 23);
+            cal.set(Calendar.MINUTE, 59);
+            cal.set(Calendar.SECOND, 59);
+            dtmp = cal.getTime();
+            Timestamp tsTo = new Timestamp(dtmp.getTime());
+       
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
             HashMap<String, Object> map = new HashMap<String, Object>();
-            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).where(Tables.ORDER.CREATEDATE.between(tsFrom, tsTo)).fetchInto(EnApp.EnOrder.class);
+            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).where(Tables.ORDER.CREATEDATE.between(tsFrom).and(tsTo)).fetchInto(EnApp.EnOrder.class);
             int sizeList = list.size();
             List<EnApp.EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
             map.put("numberOfPage", sizeList % ordersPerPage != 0 ? sizeList / ordersPerPage + 1 : sizeList / ordersPerPage);
