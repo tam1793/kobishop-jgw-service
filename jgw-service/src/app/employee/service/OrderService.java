@@ -7,17 +7,24 @@ package app.employee.service;
 
 import app.config.ConfigApp;
 import app.entity.EnApp;
+import core.utilities.CommonUtil;
 import core.utilities.DBConnector;
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import kobishop.Tables;
 import org.apache.log4j.Logger;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import static org.jooq.impl.DSL.trueCondition;
 
 /**
  *
@@ -52,13 +59,26 @@ public class OrderService {
         return instance;
     }
     
-    public HashMap<String, Object> getOrders(int page,int ordersPerPage) {
+    public HashMap<String, Object> getOrders(int page,int ordersPerPage,String orderId,String from, String to) {
         Connection conn = null;
         try {
+            DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            Condition condition = trueCondition();
+            if (CommonUtil.isInteger(orderId)) {
+                condition = condition.and(Tables.ORDER.ID.eq(Integer.parseInt(orderId)));
+            }
+            if (CommonUtil.isValidString(from) && CommonUtil.isValidString(to) ) {
+                Date date = formatter.parse(from);
+                Timestamp tsFrom = new Timestamp(date.getTime());
+                date = formatter.parse(to);
+                Timestamp tsTo = new Timestamp(date.getTime());
+                condition = condition.and(Tables.ORDER.CREATEDATE.between(tsFrom,tsTo));    
+            }
+            
             HashMap<String, Object> map = new HashMap<String, Object>();
-            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).orderBy(Tables.ORDER.CREATEDATE.desc()).fetchInto(EnApp.EnOrder.class);
+            List<EnApp.EnOrder> list = create.selectFrom(Tables.ORDER).where(condition).orderBy(Tables.ORDER.CREATEDATE.desc()).fetchInto(EnApp.EnOrder.class);
             int sizeList = list.size();
             List<EnApp.EnOrder> sub = list.subList((page - 1) * ordersPerPage, page * ordersPerPage <= sizeList ? page * ordersPerPage : sizeList);
             map.put("numberOfPage", sizeList % ordersPerPage != 0 ? sizeList / ordersPerPage + 1 : sizeList / ordersPerPage);

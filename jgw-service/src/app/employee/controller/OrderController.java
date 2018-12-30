@@ -49,6 +49,10 @@ public class OrderController extends AbstractEmployeeController {
                 logger.error("getOrders - params invalid - page: " + req.getParameter("page") + " - ordersPerPage: " + req.getParameter("ordersPerPage"));
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
+            
+            String from = req.getParameter("from");
+            String to = req.getParameter("to");
+            String orderId = req.getParameter("orderId");
             int page = Integer.parseInt(req.getParameter("page"));
             int ordersPerPage = Integer.parseInt(req.getParameter("ordersPerPage"));
             if (page < 1 || ordersPerPage < 1) {
@@ -56,7 +60,7 @@ public class OrderController extends AbstractEmployeeController {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
             
-            HashMap<String, Object> resultOrder = OrderService.getInstance().getOrders(page,ordersPerPage);
+            HashMap<String, Object> resultOrder = OrderService.getInstance().getOrders(page,ordersPerPage,orderId,from,to);
             
             if (resultOrder!=null) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultOrder);

@@ -42,7 +42,7 @@ public class OrderController extends AbstractAdminController {
         try {
             if (!CommonUtil.checkValidParam(req, new String[]{"page","ordersPerPage","from", "to"})
                     || !CommonUtil.isValidString(req.getParameter("from"))
-                    || !CommonUtil.isValidString(req.getParameter("page"))
+                    || !CommonUtil.isValidString(req.getParameter("to"))
                     || !CommonUtil.isInteger(req.getParameter("page"))
                     || !CommonUtil.isInteger(req.getParameter("ordersPerPage"))) {
                 logger.error("getOrdersByRange - params invalid");
