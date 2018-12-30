@@ -74,7 +74,7 @@ public class OrderService {
                 Timestamp tsFrom = new Timestamp(date.getTime());
                 date = formatter.parse(to);
                 Timestamp tsTo = new Timestamp(date.getTime());
-                condition = condition.and(Tables.ORDER.CREATEDATE.between(tsFrom,tsTo));    
+                condition = condition.and(Tables.ORDER.CREATEDATE.between(tsFrom).and(tsTo));    
             }
             
             HashMap<String, Object> map = new HashMap<String, Object>();
