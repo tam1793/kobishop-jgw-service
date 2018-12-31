@@ -87,7 +87,6 @@ public class ProductController extends AbstractAdminController {
                     || !CommonUtil.isValidString(req.getParameter("name"))
                     || !CommonUtil.isValidString(req.getParameter("description"))
                     || !CommonUtil.isInteger((req.getParameter("price")))
-                    || !CommonUtil.isInteger(req.getParameter("soldItems"))
                     || !CommonUtil.isInteger((req.getParameter("leftItems")))
                     || !CommonUtil.isInteger((req.getParameter("isDeleted")))
                     || !CommonUtil.isValidString(req.getParameter("specs"))) {
@@ -101,12 +100,11 @@ public class ProductController extends AbstractAdminController {
             String name = req.getParameter("name");
             String description = req.getParameter("description");
             int price = Integer.parseInt(req.getParameter("price"));
-            int soldItems = Integer.parseInt(req.getParameter("soldItems"));
             int leftItems = Integer.parseInt(req.getParameter("leftItems"));
             String specs = req.getParameter("specs"); 
             int isDeleted = Integer.parseInt(req.getParameter("isDeleted"));
 
-            int result = ProductService.getInstance().modifyProduct(productId,typeId,brandId,name, description, price, soldItems, leftItems,specs,isDeleted);
+            int result = ProductService.getInstance().modifyProduct(productId,typeId,brandId,name, description, price, leftItems,specs,isDeleted);
             switch (result) {
                 case 1:
                     return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS);

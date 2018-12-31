@@ -80,7 +80,7 @@ public class ProductService {
         return -1;
     }
     
-    public int modifyProduct(int productId,int typeId, int brandId, String name, String description,int price, int soldItems, int leftItems, String specs, int isDeleted) {
+    public int modifyProduct(int productId,int typeId, int brandId, String name, String description,int price, int leftItems, String specs, int isDeleted) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
@@ -92,7 +92,6 @@ public class ProductService {
                     .set(PRODUCT.NAME, name)
                     .set(PRODUCT.DESCRIPTION, description)
                     .set(PRODUCT.PRICE, price)
-                    .set(PRODUCT.SOLDITEMS, soldItems)
                     .set(PRODUCT.LEFTITEMS, leftItems)
                     .set(PRODUCT.SPECS, specs)
                     .set(PRODUCT.ISDELETED, Byte.valueOf(String.valueOf(isDeleted)))
