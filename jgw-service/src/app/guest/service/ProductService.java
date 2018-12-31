@@ -69,6 +69,11 @@ public class ProductService {
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         }
+        finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
+        }
         return null;
     }
 
@@ -108,6 +113,10 @@ public class ProductService {
             return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }
@@ -121,6 +130,10 @@ public class ProductService {
             return create.select().from(PRODUCT).orderBy(PRODUCT.ID.desc()).limit(5).fetch().into(EnProduct.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }
@@ -137,6 +150,10 @@ public class ProductService {
             logger.error("getProductbyId null - id: " + id);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }

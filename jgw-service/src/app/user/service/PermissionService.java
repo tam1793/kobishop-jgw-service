@@ -70,7 +70,11 @@ public class PermissionService {
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+            return null;
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
-        return null;
     }
 }

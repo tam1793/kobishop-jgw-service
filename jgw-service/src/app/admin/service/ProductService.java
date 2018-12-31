@@ -75,6 +75,10 @@ public class ProductService {
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return -1;
@@ -105,6 +109,10 @@ public class ProductService {
             return 0;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return -1;

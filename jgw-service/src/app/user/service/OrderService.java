@@ -74,8 +74,13 @@ public class OrderService {
             return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
+        
     }
     
     public boolean addOrder(int userId, String items) {
@@ -106,6 +111,10 @@ public class OrderService {
             return false;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return false;
@@ -128,6 +137,10 @@ public class OrderService {
            return listFail;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return listFail;

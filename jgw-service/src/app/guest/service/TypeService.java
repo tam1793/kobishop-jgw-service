@@ -59,6 +59,10 @@ public class TypeService {
             return create.selectFrom(Tables.TYPE).fetchInto(EnApp.EnType.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }

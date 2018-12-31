@@ -82,6 +82,10 @@ public class LoginService {
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SERVER_ERROR);
     }
@@ -108,6 +112,10 @@ public class LoginService {
 
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
 
@@ -130,6 +138,10 @@ public class LoginService {
             }
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return false;

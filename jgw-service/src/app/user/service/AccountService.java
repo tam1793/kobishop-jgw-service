@@ -59,6 +59,10 @@ public class AccountService {
             return create.fetch(Tables.ACCOUNT, Tables.ACCOUNT.ID.eq(userId)).into(EnApp.EnAccountInfo.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }
@@ -84,6 +88,10 @@ public class AccountService {
             return 0;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return -1;

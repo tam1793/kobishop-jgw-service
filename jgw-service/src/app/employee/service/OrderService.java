@@ -98,6 +98,10 @@ public class OrderService {
             return map;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         return null;
     }
@@ -119,6 +123,10 @@ public class OrderService {
             return false;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
         logger.error("Database Error");
         return false;

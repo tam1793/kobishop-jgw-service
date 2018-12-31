@@ -80,7 +80,7 @@ public class ProductController extends AbstractAdminController {
     
     private EnApiOutput modifyProduct(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            if (!checkValidParam(req, new String[]{"productId","typeId", "brandId", "name", "description", "price","soldItems","leftItems","specs","isDeleted"})
+            if (!checkValidParam(req, new String[]{"productId","typeId", "brandId", "name", "description", "price","leftItems","specs","isDeleted"})
                     || !CommonUtil.isInteger((req.getParameter("productId")))
                     || !CommonUtil.isInteger((req.getParameter("typeId")))
                     || !CommonUtil.isInteger(req.getParameter("brandId"))

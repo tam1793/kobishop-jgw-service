@@ -59,7 +59,11 @@ public class BrandService {
             return create.selectFrom(Tables.BRAND).fetchInto(EnApp.EnBrand.class);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
+            return null;
+        }finally{
+            if(conn != null){
+                dbConnector.close(conn);
+            }
         }
-        return null;
     }
 }
