@@ -100,12 +100,13 @@ public class AccountController extends AbstractAdminController {
             
             int page = Integer.parseInt(req.getParameter("page"));
             int accountsPerPage = Integer.parseInt(req.getParameter("accountsPerPage"));
+            String username = req.getParameter("username");
             if (page < 1 || accountsPerPage < 1) {
                 logger.error("check param page & accountsPerPage invalid - page: " + page + " - accountsPerPage: " + accountsPerPage);
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.INVALID_DATA_INPUT);
             }
             
-            HashMap<String, Object> resultAccount = AccountService.getInstance().getAccount(page,accountsPerPage);
+            HashMap<String, Object> resultAccount = AccountService.getInstance().getAccount(page,accountsPerPage,username);
             
             if (resultAccount!=null) {
                 return new EnApiOutput(EnApiOutput.ERROR_CODE_API.SUCCESS, resultAccount);

@@ -7,6 +7,7 @@ package app.admin.service;
 
 import app.config.ConfigApp;
 import app.entity.EnApp;
+import core.utilities.CommonUtil;
 import core.utilities.DBConnector;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -16,9 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import kobishop.Tables;
 import static kobishop.tables.Account.ACCOUNT;
 import org.apache.log4j.Logger;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import static org.jooq.impl.DSL.trueCondition;
 
 /**
  *
@@ -82,13 +85,17 @@ public class AccountService {
         return -1;
     }
     
-    public HashMap<String, Object> getAccount(int page, int accountsPerPage) {
+    public HashMap<String, Object> getAccount(int page, int accountsPerPage,String username) {
         Connection conn = null;
         try {
             conn = dbConnector.getMySqlConnection();
             DSLContext create = DSL.using(conn, SQLDialect.MARIADB);
+            Condition condition = trueCondition();
+            if (CommonUtil.isValidString(username)) {
+                condition = condition.and(Tables.ACCOUNT.USERNAME.like("%" + username + "%"));
+            }
             HashMap<String, Object> map = new HashMap<String, Object>();
-            List<EnApp.EnAccountInfoNoPass> list = create.selectFrom(Tables.ACCOUNT).fetchInto(EnApp.EnAccountInfoNoPass.class);
+            List<EnApp.EnAccountInfoNoPass> list = create.selectFrom(Tables.ACCOUNT).where(condition).fetchInto(EnApp.EnAccountInfoNoPass.class);
             int sizeList = list.size();
             List<EnApp.EnAccountInfoNoPass> sub = list.subList((page - 1) * accountsPerPage, page * accountsPerPage <= sizeList ? page * accountsPerPage : sizeList);
             map.put("numberOfPage", sizeList % accountsPerPage != 0 ? sizeList / accountsPerPage + 1 : sizeList / accountsPerPage);
